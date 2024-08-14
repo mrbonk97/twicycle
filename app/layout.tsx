@@ -8,7 +8,7 @@ import Script from "next/script";
 const inter = Noto_Sans_KR({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "트와이시클",
+  title: "이인거",
   description: "2인승 자전거 찾기",
 };
 
