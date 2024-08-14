@@ -9,9 +9,11 @@ import {
   PhoneIcon,
   XIcon,
 } from "lucide-react";
+import Image from "next/image";
 
 interface LocationInfoModalProps {
   title?: string;
+  imageUrl?: string | null;
   address?: string;
   location?: string;
   businessMonth?: string;
@@ -19,11 +21,13 @@ interface LocationInfoModalProps {
   price?: string;
   contact?: string;
   isOpen: boolean;
+  isClosing: boolean;
   handleClose: () => void;
 }
 
 export const LocationInfoModal = ({
   title,
+  imageUrl,
   address,
   location,
   businessMonth,
@@ -31,13 +35,16 @@ export const LocationInfoModal = ({
   price,
   contact,
   isOpen,
+  isClosing,
   handleClose,
 }: LocationInfoModalProps) => {
+  if (!isOpen) return null;
+
   return (
     <Card
-      className={`z-20 absolute left-[400px] top-[5%] h-[90%] w-96 rounded-lg flex flex-col items-center border-r ${
-        !isOpen && "hidden"
-      }`}
+      className={`absolute z-10 top-[5%] h-[90%] w-96 rounded-lg flex flex-col duration-500 items-center border-r 
+        ${isClosing ? "left-0" : "left-[500px]"}
+      `}
     >
       <CardHeader>
         <CardTitle>{title}</CardTitle>
@@ -46,7 +53,13 @@ export const LocationInfoModal = ({
         </button>
       </CardHeader>
       <CardContent className="w-full">
-        <div id="road-map" className="w-full h-52 bg-blue-200" />
+        <Image
+          src={imageUrl || "/images/location-placeholder.jpg"}
+          width={400}
+          height={400}
+          alt="location"
+          className="w-full h-52 object-cover overflow-hidden border rounded-lg"
+        />
         <Separator className="my-5 w-full" />
         <hgroup>
           <span className="flex items-center gap-1 break-keep">

@@ -15,23 +15,22 @@ import {
 } from "@/components/ui/menubar";
 import { Button } from "../ui/button";
 import Link from "next/link";
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { Input } from "../ui/input";
+import { SearchIcon } from "lucide-react";
 
 export const Topnav = () => {
   return (
-    <Menubar className="fixed top-0 left-0 w-full z-50 py-7 px-[5%] flex items-center justify-between">
-      <MenubarMenu>
-        <Button variant={"ghost"} asChild>
-          <Link href="/">트와이시클</Link>
-        </Button>
-      </MenubarMenu>
-
-      <MenubarMenu>
-        <Avatar>
-          <AvatarImage src="https://github.com/shadcn.png" />
-          <AvatarFallback>CN</AvatarFallback>
-        </Avatar>
-      </MenubarMenu>
-    </Menubar>
+    <header>
+      <form className="fixed top-10 z-50 right-1/4" action={"/search"}>
+        <button className="absolute top-1/2 left-4 -translate-y-1/2">
+          <SearchIcon />
+        </button>
+        <Input
+          name="q"
+          className="pl-12 py-5 w-96 rounded-full"
+          placeholder="검색"
+        />
+      </form>
+    </header>
   );
 };
