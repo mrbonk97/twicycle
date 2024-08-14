@@ -3,6 +3,7 @@ import { RENTAL_LOCATION } from "@/constants";
 import { createSelectors } from "@/stores/create-selector";
 import { useNaverMapStoreBase } from "@/stores/useNaverStoreBase";
 import { useEffect, useRef } from "react";
+import { Spinner } from "../spinner";
 
 interface NaverMapProps {
   lat: number;
@@ -43,16 +44,30 @@ export const NaverMap = ({ lat, lng }: NaverMapProps) => {
         });
 
         naver.maps.Event.addListener(marker, "click", function (e) {
-          // marker.setAnimation(naver.maps.Animation.BOUNCE);
+          marker.setAnimation(naver.maps.Animation.BOUNCE);
           map.panTo(e.coord);
         });
       });
     };
+
+    const { naver } = window;
+    if (naver) {
+      loadMap();
+      return;
+    }
 
     document
       .getElementById("naver-map-script")!
       .addEventListener("load", loadMap);
   }, []);
 
-  return <div id="map" className="h-full w-full bg-rose-200" ref={mapRef} />;
+  return (
+    <div
+      id="map"
+      className="h-full w-full flex items-center justify-center"
+      ref={mapRef}
+    >
+      <Spinner />
+    </div>
+  );
 };
