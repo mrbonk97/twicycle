@@ -21,11 +21,11 @@ export const NaverMap = ({ lat, lng }: NaverMapProps) => {
       const location = new naver.maps.LatLng(lat, lng);
 
       const mapOptions = {
-        zoomControl: true,
-        zoomControlOptions: {
-          style: naver.maps.ZoomControlStyle.SMALL,
-          position: naver.maps.Position.TOP_RIGHT,
-        },
+        // zoomControl: true,
+        // zoomControlOptions: {
+        //   style: naver.maps.ZoomControlStyle.SMALL,
+        //   position: naver.maps.Position.TOP_RIGHT,
+        // },
         center: location,
         zoom: 16,
       };

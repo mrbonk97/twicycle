@@ -21,7 +21,10 @@ import { SearchIcon } from "lucide-react";
 export const Topnav = () => {
   return (
     <header>
-      <form className="fixed top-10 z-50 right-1/4" action={"/search"}>
+      <form
+        className="fixed hidden sm:block top-10 z-50 right-1/4"
+        action={"/search"}
+      >
         <button className="absolute top-1/2 left-4 -translate-y-1/2">
           <SearchIcon />
         </button>

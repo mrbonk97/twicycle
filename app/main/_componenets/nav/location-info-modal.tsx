@@ -1,5 +1,14 @@
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Separator } from "@/components/ui/separator";
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from "@/components/ui/dialog";
+
 import { useBoundStore } from "@/stores/bound-store";
 import { createSelectors } from "@/stores/create-selector";
 import {
@@ -12,20 +21,22 @@ import {
   XIcon,
 } from "lucide-react";
 import Image from "next/image";
-import { useEffect } from "react";
 
 export const LocationInfoModal = () => {
   const modalSlice = createSelectors(useBoundStore);
+  const isOpen = modalSlice.use.isOpen();
   const isOpening = modalSlice.use.isOpening();
   const isClosing = modalSlice.use.isClosing();
   const handleClose = modalSlice.use.handleClose();
   const content = modalSlice.use.content();
 
+  if (!isOpen) return null;
+
   return (
     <Card
-      className={`absolute z-10 top-[5%] h-[90%] min-h-96 lg:min-h-[650px] overflow-y-auto w-96 rounded-lg flex flex-col duration-500 items-center border-r 
-        ${isClosing && "left-0 "} 
-        ${isOpening && "left-[500px] "}
+      className={`fixed flex z-10 h-[90%] sm:top-[5%] min-h-96 lg:min-h-[650px] overflow-y-auto w-96 rounded-lg flex-col duration-500 items-center border-r 
+        ${isClosing && "sm:left-0 top-full"} 
+        ${isOpening && "sm:left-[470px] top-[5%]"}
       `}
     >
       <CardHeader>

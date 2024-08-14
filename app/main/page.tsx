@@ -8,6 +8,7 @@ import { useEffect } from "react";
 import { createSelectors } from "@/stores/create-selector";
 import { useBoundStore } from "@/stores/bound-store";
 import { LocationType } from "@/types";
+import { Bottomnav } from "./_componenets/nav/bottom-nav";
 
 const MainPage = () => {
   const useStore = createSelectors(useBoundStore);
@@ -48,6 +49,7 @@ const MainPage = () => {
           <NaverMap lat={RENTAL_LOCATION[0].lat} lng={RENTAL_LOCATION[0].lng} />
         </section>
       </main>
+      <Bottomnav />
     </>
   );
 };

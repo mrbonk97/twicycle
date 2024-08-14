@@ -4,7 +4,7 @@ import { SearchIcon } from "lucide-react";
 
 export const SearchTopnav = () => {
   return (
-    <section className="fixed top-0 px-[5%] h-20 w-full flex items-center justify-between border-b bg-white z-10">
+    <section className="fixed top-0 px-[5%] h-20 w-full flex items-center justify-between border-b bg-primary-foreground z-10">
       <div />
       <form action={"/search"} className="relative">
         <button className="absolute top-1/2 left-4 -translate-y-1/2">

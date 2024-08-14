@@ -246,13 +246,13 @@ export const MENU_LIST = [
     url: "/search",
     icon: <MapPinIcon size={32} />,
   },
-  {
-    id: 3,
-    region: "seoul",
-    title: "첫화면",
-    url: "/",
-    icon: <BikeIcon size={32} />,
-  },
+  // {
+  //   id: 3,
+  //   region: "seoul",
+  //   title: "첫화면",
+  //   url: "/",
+  //   icon: <BikeIcon size={32} />,
+  // },
 ];
 
 export const REGION = [

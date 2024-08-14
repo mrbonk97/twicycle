@@ -23,8 +23,8 @@ export const LocationCard = ({ props }: LocationCardProps) => {
   return (
     <li
       className={`p-3 pr-5 h-32 w-full flex items-center justify-between border-b cursor-pointer group duration-150
-        hover:bg-blue-50/20
-        ${props.id == focusedId && "bg-blue-50"}`}
+        hover:bg-secondary/50
+        ${props.id == focusedId && "bg-primary-foreground"}`}
       onClick={handleClick}
     >
       <hgroup className="h-full">

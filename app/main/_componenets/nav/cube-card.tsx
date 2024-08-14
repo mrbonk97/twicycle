@@ -19,7 +19,7 @@ export const CubeCard = ({ title, url, icon }: CubeCardProps) => {
         <TooltipTrigger asChild>
           <Link
             href={url}
-            className="w-full aspect-square rounded-lg cursor-pointer flex items-center justify-center bg-blue-50 hover:opacity-80 duration-200"
+            className="w-12 sm:w-full aspect-square rounded-lg cursor-pointer flex items-center justify-center bg-secondary hover:opacity-80 duration-200"
           >
             {icon}
           </Link>

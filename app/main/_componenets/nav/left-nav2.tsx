@@ -6,8 +6,8 @@ import { RENTAL_LOCATION } from "@/constants";
 export const Leftnav2 = () => {
   return (
     <>
-      <aside className="fixed left-20 z-20 h-full w-96 bg-background border-r overflow-y-auto">
-        <div className="w-full h-24 bg-blue-50 flex items-center justify-center border-b">
+      <aside className="fixed hidden sm:block left-20 z-20 h-full w-96 bg-background border-r overflow-y-auto">
+        <div className="w-full h-24 bg-secondary flex items-center justify-center border-b">
           <Logo />
         </div>
         <ul>

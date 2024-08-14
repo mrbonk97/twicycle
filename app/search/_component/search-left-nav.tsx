@@ -13,8 +13,8 @@ export const SearchLeftnav = ({
   setSelectedRow,
 }: SearchLeftnavProps) => {
   return (
-    <aside className="fixed z-20 left-20 h-full w-96 border-r overflow-y-auto">
-      <div className="w-full h-24 bg-blue-50 flex items-center justify-center border-b">
+    <aside className="fixed z-20 left-20 h-full w-96 border-r bg-primary-foreground/50 overflow-y-auto">
+      <div className="w-full h-20 flex items-center justify-center bg-primary-foreground border-b">
         지역별 메뉴
       </div>
       <ul>
