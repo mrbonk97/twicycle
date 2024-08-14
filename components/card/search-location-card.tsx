@@ -1,6 +1,5 @@
 "use client";
 import { createSelectors } from "@/stores/create-selector";
-import { useNaverMapStoreBase } from "@/stores/useNaverStoreBase";
 import { ChevronRight, LocateFixedIcon, MapPinIcon } from "lucide-react";
 import {
   Card,
@@ -10,6 +9,7 @@ import {
   CardTitle,
 } from "../ui/card";
 import Image from "next/image";
+import { useBoundStore } from "@/stores/bound-store";
 
 interface SearchLocationCardProps {
   title: string;
@@ -28,8 +28,8 @@ export const SearchLocationCard = ({
   lng,
   imageUrl,
 }: SearchLocationCardProps) => {
-  const useNaverStore = createSelectors(useNaverMapStoreBase);
-  const naverMap = useNaverStore.use.naverMap();
+  const useStore = createSelectors(useBoundStore);
+  const naverMap = useStore.use.naverMap();
 
   return (
     <li>
