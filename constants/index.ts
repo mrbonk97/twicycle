@@ -204,3 +204,10 @@ export const RENTAL_LOCATION = [
       "운영업체 010-4423-9880 (㈜타고)\n잠원안내센터 02-3780-0531~3\n시민활동지원과 02-3780-0772",
   },
 ];
+
+export const MENU_LIST = [
+  {
+    id: 1,
+    title: "홈",
+  },
+];
