@@ -24,11 +24,13 @@ export default function Home() {
   };
 
   const handleNextPage = () => {
+    let delta = 0.01;
     setInterval(() => {
-      setZ((cur) => cur + 0.01);
+      setZ((cur) => cur + delta);
+      delta += 0.0001;
     }, 1);
 
-    setTimeout(() => router.push("/main"), 1500);
+    setTimeout(() => router.push("/main"), 1200);
   };
 
   return (
