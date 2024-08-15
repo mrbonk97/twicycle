@@ -40,6 +40,16 @@ export default function Home() {
           intensity={Math.PI}
         />
         <pointLight position={[-10, -10, -10]} decay={0} intensity={Math.PI} />
+        <Text3d scale={1} y={2} x={0} z={z} text={"이인거"} fontWeight={900} />
+        <Text3d
+          scale={1}
+          y={1.2}
+          x={0}
+          z={z}
+          text={"2인용 자전거 대여 위치 검색 서비스"}
+          fontSize={0.2}
+          fontWeight={700}
+        />
         {/* 우측 위 */}
         <Bicycle3d1 x={4} y={2} z={1 + z} rotateZ={2} rotateX={1} />
         {/* 왼쪽 중단 */}
