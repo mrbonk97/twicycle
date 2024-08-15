@@ -9,6 +9,7 @@ import { createSelectors } from "@/stores/create-selector";
 import { useBoundStore } from "@/stores/bound-store";
 import { LocationType } from "@/types";
 import { Bottomnav } from "./_componenets/nav/bottom-nav";
+import { LocationInfoModal } from "./_componenets/nav/location-info-modal";
 
 const MainPage = () => {
   const useStore = createSelectors(useBoundStore);
@@ -42,6 +43,7 @@ const MainPage = () => {
   return (
     <>
       <Topnav />
+      <LocationInfoModal />
       <main className="h-full w-full flex">
         <Leftnav1 />
         <Leftnav2 />

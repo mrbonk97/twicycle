@@ -32,11 +32,13 @@ export const LocationInfoModal = () => {
 
   if (!isOpen) return null;
 
+  // sm:top-[5%] min-h-96 lg:min-h-[650px]
+  // ${isClosing && "sm:left-0 top-full"}
+  // ${isOpening && "sm:left-[470px] top-[5%]"}
   return (
     <Card
-      className={`fixed flex z-10 h-[90%] sm:top-[5%] min-h-96 lg:min-h-[650px] overflow-y-auto w-96 rounded-lg flex-col duration-500 items-center border-r 
-        ${isClosing && "sm:left-0 top-full"} 
-        ${isOpening && "sm:left-[470px] top-[5%]"}
+      className={`fixed z-10 top-20 left-5 md:left-[21rem] md:w-[calc(100%-22.25rem)] lg:left-[30rem] lg:w-[500px] h-[calc(100%-6.5rem)] w-[calc(100%-40px)] overflow-y-auto duration-500 
+      
       `}
     >
       <CardHeader>

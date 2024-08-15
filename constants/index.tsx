@@ -1,4 +1,4 @@
-import { BikeIcon, HomeIcon, MapPinIcon } from "lucide-react";
+import { BikeIcon, HomeIcon, MapPinIcon, VenetianMaskIcon } from "lucide-react";
 
 export const RENTAL_LOCATION = [
   {
@@ -233,30 +233,49 @@ export const RENTAL_LOCATION = [
 
 export const MENU_LIST = [
   {
-    id: 1,
-    region: "seoul",
+    id: "menu1",
     title: "홈",
     url: "/main",
     icon: <HomeIcon size={32} />,
   },
   {
-    id: 2,
-    region: "seoul",
-    title: "검색",
+    id: "menu2",
+    title: "목록",
     url: "/search",
     icon: <MapPinIcon size={32} />,
   },
-  // {
-  //   id: 3,
-  //   region: "seoul",
-  //   title: "첫화면",
-  //   url: "/",
-  //   icon: <BikeIcon size={32} />,
-  // },
+  {
+    id: "menu3",
+    title: "신규제보하기",
+    url: "/request",
+    icon: <VenetianMaskIcon size={32} />,
+  },
+  {
+    id: "menu4",
+    title: "첫화면",
+    url: "/",
+    icon: <BikeIcon size={32} />,
+  },
 ];
 
-export const REGION = [
-  { id: 1, region: "*", title: "전체" },
+export const MENU_LIST2 = [
+  {
+    id: "menu1",
+    region: "seoul",
+    title: "홈",
+    url: "/main",
+    icon: <HomeIcon size={24} />,
+  },
+  {
+    id: "menu2",
+    region: "seoul",
+    title: "검색",
+    url: "/search",
+    icon: <MapPinIcon size={24} />,
+  },
+];
+
+export const REGIONS = [
   { id: 2, region: "seoul", title: "서울" },
   { id: 3, region: "gyeonggi", title: "경기" },
   { id: 4, region: "incheon", title: "인천" },
@@ -271,4 +290,5 @@ export const REGION = [
   { id: 13, region: "daegu", title: "대구" },
   { id: 14, region: "jeonnam", title: "전남" },
   { id: 15, region: "jeonju", title: "전주/전북" },
+  { id: 1, region: "all", title: "전체" },
 ];

@@ -1,27 +1,33 @@
 "use client";
 import { Leftnav1 } from "../main/_componenets/nav/left-nav1";
 import { SearchLeftnav } from "./_component/search-left-nav";
-import { SearchTopnav } from "./_component/top-nav";
 import { LocationList } from "./_component/location-list";
 import { useState } from "react";
-import { REGION } from "@/constants";
-import { Rightnav } from "./_component/right-nav";
+import { REGIONS } from "@/constants";
+import { Topnav1 } from "./_component/top-nav1";
+import { Topnav2 } from "./_component/top-nav2";
 
 const SearchPage = () => {
-  const [selectedRow, setSelectedRow] = useState(REGION[0]);
+  const [selectedRegion, setSelectedRegion] = useState("all");
 
   return (
     <>
-      <SearchTopnav />
+      <Topnav1 />
+      <Topnav2
+        selectedRegion={selectedRegion}
+        setSelectedRegion={setSelectedRegion}
+      />
       <Leftnav1 />
       <SearchLeftnav
-        selectedRow={selectedRow}
-        setSelectedRow={setSelectedRow}
+        selectedRegion={selectedRegion}
+        setSelectedRegion={setSelectedRegion}
       />
-      <Rightnav />
-      <main className="pl-[31.5rem] pr-96 pb-5 pt-24 w-full">
-        <h2 className="text-xl font-medium">{selectedRow.title}</h2>
-        <LocationList filterRegion={selectedRow?.region} />
+      {/* <Rightnav /> */}
+      <main className="pb-10 pt-48 sm:pt-20 sm:pl-[14rem] md:pl-[19rem] lg:pl-[24rem] min-h-full w-full">
+        <h2 className="hidden sm:block text-xl font-medium">
+          {REGIONS.find((item) => (item.region = selectedRegion))?.title}
+        </h2>
+        <LocationList filterRegion={selectedRegion} />
       </main>
     </>
   );

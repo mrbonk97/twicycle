@@ -34,7 +34,7 @@ export const SearchLocationCard = ({
   return (
     <li>
       <Card
-        className="h-96 w-96 border cursor-pointer group duration-150
+        className="w-80 sm:h-96 sm:w-96 cursor-pointer group duration-150
         hover:bg-blue-50/20"
       >
         <CardHeader>
@@ -49,7 +49,7 @@ export const SearchLocationCard = ({
             alt="location"
             className="w-full h-52 object-cover overflow-hidden border rounded-lg"
           />
-          <div className="text-sm flex items-center gap-1 break-keep">
+          <div className="mt-2 text-sm flex items-center gap-1 break-keep">
             <MapPinIcon size={12} />
             {address}
           </div>

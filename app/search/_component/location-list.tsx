@@ -7,9 +7,9 @@ interface LocationListProps {
 
 export const LocationList = ({ filterRegion }: LocationListProps) => {
   return (
-    <ul className="pt-5 w-full flex flex-wrap justify-center gap-10">
+    <ul className="pt-10 sm:pt-5 w-full flex flex-wrap justify-center gap-10">
       {RENTAL_LOCATION.filter((item) => {
-        if (filterRegion == "*") return item;
+        if (filterRegion == "all") return item;
         if (filterRegion == item.region) return item;
       }).map((item) => (
         <SearchLocationCard

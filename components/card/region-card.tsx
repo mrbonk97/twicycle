@@ -7,7 +7,7 @@ interface RegionCardProps {
 export const RegionCard = ({ isSelected, title, onClick }: RegionCardProps) => (
   <li
     onClick={onClick}
-    className={`p-4 w-full border-b cursor-pointer duration-150 hover:bg-secondary/80
+    className={`py-[11px] px-5 w-full border-b cursor-pointer duration-150 hover:bg-secondary/80
       ${isSelected && "bg-secondary"}`}
   >
     {title}

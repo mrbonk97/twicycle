@@ -3,7 +3,7 @@ import { CubeCard } from "./cube-card";
 import { ThemeTogle } from "@/components/theme-toggle";
 
 export const Leftnav1 = () => (
-  <aside className="fixed hidden sm:block z-20 left-0 p-5 px-2 h-full w-20  border-r bg-background">
+  <aside className="fixed z-30 hidden lg:block left-0 p-5 px-2 h-full w-20  border-r bg-background">
     <nav className="space-y-4 text-blue-400">
       {MENU_LIST.map((item) => (
         <CubeCard

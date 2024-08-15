@@ -1,38 +1,20 @@
-import {
-  Menubar,
-  MenubarCheckboxItem,
-  MenubarContent,
-  MenubarItem,
-  MenubarMenu,
-  MenubarRadioGroup,
-  MenubarRadioItem,
-  MenubarSeparator,
-  MenubarShortcut,
-  MenubarSub,
-  MenubarSubContent,
-  MenubarSubTrigger,
-  MenubarTrigger,
-} from "@/components/ui/menubar";
-import { Button } from "../ui/button";
-import Link from "next/link";
+import { MenuSheet } from "../sheet/menu-sheet";
 import { Input } from "../ui/input";
-import { SearchIcon } from "lucide-react";
+import { MenuIcon, SearchIcon } from "lucide-react";
 
 export const Topnav = () => {
   return (
-    <header>
-      <form
-        className="fixed hidden sm:block top-10 z-50 right-1/4"
-        action={"/search"}
-      >
+    <header className="fixed z-20 top-4 md:pl-[21rem] lg:pl-[30rem] w-full flex lg:justify-end px-5 gap-2">
+      <form action={"/search"} className="relative w-full lg:max-w-80">
         <button className="absolute top-1/2 left-4 -translate-y-1/2">
           <SearchIcon />
         </button>
         <Input
           name="q"
-          className="pl-12 py-5 w-96 rounded-full"
+          className="pl-12 py-6 w-full lg:rounded-full"
           placeholder="검색"
         />
+        <MenuSheet />
       </form>
     </header>
   );

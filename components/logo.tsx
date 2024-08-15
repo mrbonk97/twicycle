@@ -1,15 +1,18 @@
 import { Bagel_Fat_One } from "next/font/google";
 import Image from "next/image";
 
-const inter = Bagel_Fat_One({ subsets: ["latin"], weight: ["400"] });
+export const bagelFatOne = Bagel_Fat_One({
+  subsets: ["latin"],
+  weight: ["400"],
+});
 
 export const Logo = () => {
   return (
     <div
-      className={`${inter.className} w-40 text-3xl flex items-center gap-2 text-blue-400`}
+      className={`${bagelFatOne.className} w-32 text-2xl flex2 gap-2 text-blue-400`}
     >
-      <Image src={"/logo.png"} width={60} height={60} alt="logo" />
-      이인거
+      <Image src={"/logo.png"} width={50} height={50} alt="logo" />
+      <h2>이인거</h2>
     </div>
   );
 };
