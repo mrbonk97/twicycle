@@ -12,8 +12,9 @@ import {
   SheetTrigger,
 } from "@/components/ui/sheet";
 import { MENU_LIST } from "@/constants";
-import { icons, MenuIcon } from "lucide-react";
+import { icons, MenuIcon, Moon, Sun } from "lucide-react";
 import Link from "next/link";
+import { ThemeTogle } from "../theme-toggle";
 
 export const MenuSheet = () => {
   return (
@@ -45,9 +46,21 @@ export const MenuSheet = () => {
           ))}
         </nav>
 
-        {/* <SheetFooter className="space-y-5">
-        
-        </SheetFooter> */}
+        <SheetFooter className="mt-5">
+          <ThemeTogle>
+            <Button
+              variant={"secondary"}
+              className="p-6 w-full flex items-center gap-4 justify-start"
+            >
+              <span className="text-blue-400">
+                <Sun size={32} className="dark:hidden" />
+                <Moon size={32} className="hidden dark:block" />
+                <span className="sr-only">Toggle theme</span>
+              </span>
+              테마 선택
+            </Button>
+          </ThemeTogle>
+        </SheetFooter>
       </SheetContent>
     </Sheet>
   );
