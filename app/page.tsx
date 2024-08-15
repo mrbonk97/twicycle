@@ -1,7 +1,7 @@
 "use client";
 import { Loader, Sky } from "@react-three/drei";
 import { Canvas } from "@react-three/fiber";
-import { Suspense, useState, WheelEvent } from "react";
+import { useState, WheelEvent } from "react";
 import { useRouter } from "next/navigation";
 import { Bicycle3d1 } from "@/components/object/bicycle3d1";
 import { Text3d } from "@/components/object/text3d";
@@ -29,18 +29,6 @@ export default function Home() {
 
   return (
     <main className="h-full w-full" onWheel={handleScroll}>
-      <button
-        onClick={handleNextPage}
-        className="fixed z-50 h-36 w-36 rounded-full overflow-hidden group bottom-1/4 left-1/2 -translate-x-1/2"
-      >
-        <div className="absolute top-0 left-0 h-full w-full -translate-y-full group-hover:translate-y-0 duration-300">
-          <div className="h-full w-full bg-blue-400" />
-          <div className="h-full w-full bg-white" />
-        </div>
-        <span className="relative z-50 text-lg font-medium duration-300 text-blue-400 group-hover:text-white">
-          자전거 찾기
-        </span>
-      </button>
       <Canvas>
         <Sky />
         <ambientLight intensity={Math.PI / 2} />
@@ -77,4 +65,19 @@ export default function Home() {
       </Canvas>
     </main>
   );
+}
+
+{
+  /* <button
+onClick={handleNextPage}
+className="fixed z-50 h-36 w-36 rounded-full overflow-hidden group bottom-1/4 left-1/2 -translate-x-1/2"
+>
+<div className="absolute top-0 left-0 h-full w-full -translate-y-full group-hover:translate-y-0 duration-300">
+  <div className="h-full w-full bg-blue-400" />
+  <div className="h-full w-full bg-white" />
+</div>
+<span className="relative z-50 text-lg font-medium duration-300 text-blue-400 group-hover:text-white">
+  자전거 찾기
+</span>
+</button> */
 }
