@@ -21,7 +21,7 @@ export function ThemeTogle({ children }: ThemeToggleProps) {
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>{children}</DropdownMenuTrigger>
-      <DropdownMenuContent align="end">
+      <DropdownMenuContent align="end" className="z-[104]">
         <DropdownMenuItem onClick={() => setTheme("light")}>
           라이트모드
         </DropdownMenuItem>
