@@ -1,5 +1,5 @@
 "use client";
-import { Loader, Sky } from "@react-three/drei";
+import { Sky } from "@react-three/drei";
 import { Canvas } from "@react-three/fiber";
 import { Suspense, useState, WheelEvent } from "react";
 import { useRouter } from "next/navigation";
@@ -8,6 +8,7 @@ import { Text3d } from "@/components/object/text3d";
 import { Bicycle3d2 } from "@/components/object/bicycle3d2";
 import { Bicycle3d3 } from "@/components/object/bicycle3d3";
 import { Spinner } from "@/components/spinner";
+import Link from "next/link";
 
 export default function Home() {
   const [z, setZ] = useState(0);
@@ -41,6 +42,7 @@ export default function Home() {
           onClick={handleNextPage}
           className="fixed z-50 h-28 w-28 rounded-full overflow-hidden group bottom-1/4 left-1/2 -translate-x-1/2"
         >
+          <Link href={"/main"} className="sr-only"></Link>
           <div className="absolute top-0 left-0 h-full w-full -translate-y-full group-hover:translate-y-0 duration-300">
             <div className="h-full w-full bg-white" />
             <div className="h-full w-full bg-[#5D90BE]" />
