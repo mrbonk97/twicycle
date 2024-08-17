@@ -1,4 +1,4 @@
-import { NotificationEmailTemplate } from "@/components/notification-email-template";
+import { NotificationEmailTemplate } from "@/components/email-template/notification-email-template";
 import { NextRequest } from "next/server";
 import { Resend } from "resend";
 

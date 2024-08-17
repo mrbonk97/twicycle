@@ -6,6 +6,7 @@ import { useState } from "react";
 import { REGIONS } from "@/constants";
 import { Topnav1 } from "./_component/top-nav1";
 import { Topnav2 } from "./_component/top-nav2";
+import { PleaseRequestCard } from "@/components/card/please-request-card";
 
 const SearchPage = () => {
   const [selectedRegion, setSelectedRegion] = useState("all");
@@ -23,7 +24,7 @@ const SearchPage = () => {
         setSelectedRegion={setSelectedRegion}
       />
       {/* <Rightnav /> */}
-      <main className="pb-10 pt-48 sm:pt-20 sm:pl-[14rem] md:pl-[19rem] lg:pl-[24rem] min-h-full w-full">
+      <main className="pb-10 pr-3 pt-48 sm:pt-20 sm:pl-[14rem] md:pl-[19rem] lg:pl-[24rem] min-h-full w-full">
         <h2 className="hidden sm:block text-xl font-medium">
           {REGIONS.find((item) => (item.region = selectedRegion))?.title}
         </h2>
