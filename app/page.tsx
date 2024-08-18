@@ -39,7 +39,7 @@ export default function Home() {
       >
         <button
           onClick={handleNextPage}
-          className="fixed z-50 h-36 w-36 rounded-full overflow-hidden group bottom-1/4 left-1/2 -translate-x-1/2"
+          className="fixed z-50 h-32 w-32 rounded-full overflow-hidden group bottom-1/4 left-1/2 -translate-x-1/2"
         >
           <div className="absolute top-0 left-0 h-full w-full -translate-y-full group-hover:translate-y-0 duration-300">
             <div className="h-full w-full bg-blue-400" />
