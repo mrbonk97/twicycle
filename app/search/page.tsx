@@ -22,7 +22,6 @@ const SearchPage = () => {
         selectedRegion={selectedRegion}
         setSelectedRegion={setSelectedRegion}
       />
-      {/* <Rightnav /> */}
       <main className="pb-10 pt-48 sm:pt-20 sm:pl-[14rem] md:pl-[19rem] lg:pl-[24rem] min-h-full w-full">
         <h2 className="hidden sm:block text-xl font-medium">
           {REGIONS.find((item) => (item.region = selectedRegion))?.title}

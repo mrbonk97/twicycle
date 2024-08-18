@@ -1,29 +1,25 @@
 import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
 import {
   Sheet,
   SheetClose,
   SheetContent,
-  SheetDescription,
   SheetFooter,
   SheetHeader,
   SheetTitle,
   SheetTrigger,
 } from "@/components/ui/sheet";
 import { MENU_LIST } from "@/constants";
-import { icons, MenuIcon, Moon, Sun } from "lucide-react";
+import { MenuIcon, Moon, Sun } from "lucide-react";
 import Link from "next/link";
 import { ThemeTogle } from "../theme-toggle";
 
-export const MenuSheet = () => {
+interface MenuSheetProps {
+  children: React.ReactNode;
+}
+export const MenuSheet = ({ children }: MenuSheetProps) => {
   return (
     <Sheet>
-      <SheetTrigger asChild>
-        <button className="absolute lg:hidden top-1/2 right-4 -translate-y-1/2">
-          <MenuIcon size={32} />
-        </button>
-      </SheetTrigger>
+      <SheetTrigger asChild>{children}</SheetTrigger>
       <SheetContent>
         <SheetHeader>
           <SheetTitle>메뉴</SheetTitle>

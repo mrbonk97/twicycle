@@ -14,7 +14,11 @@ export const Topnav = () => {
           className="pl-12 py-6 w-full lg:rounded-full"
           placeholder="검색"
         />
-        <MenuSheet />
+        <MenuSheet>
+          <button className="absolute lg:hidden top-1/2 right-4 -translate-y-1/2">
+            <MenuIcon size={32} />
+          </button>
+        </MenuSheet>
       </form>
     </header>
   );
