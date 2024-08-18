@@ -74,7 +74,7 @@ export const RequestCard = () => {
 
   async function onSubmit(values: z.infer<typeof formSchema>) {
     notiForm.setValue("name", values.name);
-    const result = await fetch("/api/send", {
+    const result = await fetch("/api/send/rental-location", {
       headers: {
         Accept: "application/json",
         "Content-Type": "application/json",
@@ -86,7 +86,7 @@ export const RequestCard = () => {
   }
 
   async function notiFormOnSubmit(values: z.infer<typeof notiFormSchema>) {
-    const result = await fetch("/api/send-noti", {
+    const result = await fetch("/api/send/notification", {
       headers: {
         Accept: "application/json",
         "Content-Type": "application/json",
