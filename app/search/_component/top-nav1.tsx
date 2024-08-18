@@ -1,5 +1,6 @@
 import { Logo } from "@/components/logo";
 import { LogoSimple } from "@/components/logo-simple";
+import { MenuSheet } from "@/components/sheet/menu-sheet";
 import { Input } from "@/components/ui/input";
 import { SearchIcon } from "lucide-react";
 
@@ -12,12 +13,16 @@ export const Topnav1 = () => {
         </button>
         <Input name="q" className="pl-12 w-full" placeholder="검색" />
       </form>
-      <div className="sm:hidden">
-        <LogoSimple />
-      </div>
-      <div className="hidden sm:block">
-        <Logo />
-      </div>
+      <MenuSheet>
+        <button>
+          <div className="sm:hidden">
+            <LogoSimple />
+          </div>
+          <div className="hidden sm:inline">
+            <Logo />
+          </div>
+        </button>
+      </MenuSheet>
     </header>
   );
 };
