@@ -11,6 +11,23 @@ const inter = Noto_Sans_KR({ subsets: ["latin"] });
 export const metadata: Metadata = {
   title: "이인거",
   description: "2인승 자전거 찾기",
+  keywords: ["자전거", "bicycle", "대여", "2인승 자전거"],
+
+  openGraph: {
+    images: ["https://www.twicycle.site/images/meta.png"],
+    title: "이인거",
+    description: "2인승 자전거 찾기",
+    locale: "ko",
+    tags: ["website", "bicycle", "rent"],
+    url: "https://www.twicycle.site",
+  },
+  twitter: {
+    images: ["https://www.twicycle.site/images/meta.png"],
+    title: "이인거",
+    description: '  description: "2인승 자전거 찾기",',
+    creator: "mrbonk97",
+    site: "https://www.twicycle.site",
+  },
 };
 
 export default function RootLayout({
