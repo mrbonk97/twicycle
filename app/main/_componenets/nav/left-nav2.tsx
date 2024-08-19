@@ -1,20 +1,16 @@
 "use client";
-import {
-  ArrowLeftToLine,
-  ArrowRightToLine,
-  LucideChevronLeft,
-  LucideChevronsLeft,
-  LucideChevronsRight,
-} from "lucide-react";
+import { ArrowLeftToLine, ArrowRightToLine } from "lucide-react";
 import { LocationCard } from "./location-card";
-import { LocationInfoModal } from "./location-info-modal";
 import { Logo } from "@/components/logo";
 import { RENTAL_LOCATION } from "@/constants";
 import { Button } from "@/components/ui/button";
-import { useState } from "react";
+import { createSelectors } from "@/stores/create-selector";
+import { useBoundStore } from "@/stores/bound-store";
 
 export const Leftnav2 = () => {
-  const [isMinimized, setIsMinimized] = useState(false);
+  const useStore = createSelectors(useBoundStore);
+  const isMinimized = useStore.use.isMinimized();
+  const changeMinimized = useStore.use.changeMinimized();
   return (
     <>
       <aside
@@ -24,14 +20,7 @@ export const Leftnav2 = () => {
         <div className="px-2 h-24 bg-secondary flex items-center justify-between border-b">
           <div />
           <Logo />
-          <Button
-            size={"icon"}
-            variant={"secondary"}
-            onClick={() => {
-              console.log("희흰 ");
-              setIsMinimized((cur) => !cur);
-            }}
-          >
+          <Button size={"icon"} variant={"secondary"} onClick={changeMinimized}>
             <ArrowRightToLine
               className={`opacity-80 ${!isMinimized && "hidden"}`}
             />

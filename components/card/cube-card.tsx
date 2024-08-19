@@ -24,7 +24,7 @@ export const CubeCard = ({ title, url, icon }: CubeCardProps) => {
             {icon}
           </Link>
         </TooltipTrigger>
-        <TooltipContent side="right" className="z-50">
+        <TooltipContent side="right" className="z-[200]">
           <p>{title}</p>
         </TooltipContent>
       </Tooltip>
