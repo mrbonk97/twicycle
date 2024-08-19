@@ -1,18 +1,31 @@
-import { Leftnav1 } from "./_componenets/nav/left-nav1";
-import { Leftnav2 } from "./_componenets/nav/left-nav2";
+"use client";
 import { Topnav } from "@/components/nav/top-nav";
-import { LocationInfoModal } from "./_componenets/nav/location-info-modal";
+import { LeftRouternav } from "@/components/nav/left-router-nav";
+import { Leftnav } from "./_componenets/nav/left-nav";
 import { DefaultMap } from "@/components/map/default-map";
+import { LocationInfoModal } from "./_componenets/nav/location-info-modal";
+import { useSearchParams } from "next/navigation";
+import { RENTAL_LOCATION } from "@/constants";
 
 const MainPage = () => {
+  const searchParms = useSearchParams();
+  const id = searchParms.get("id");
+  const q = searchParms.get("q");
+
+  const list = RENTAL_LOCATION.filter((item) => {
+    if (id) return item.id == parseInt(id);
+    if (q) return item.title.includes(q);
+    return true;
+  });
+
   return (
     <>
       <Topnav />
       <LocationInfoModal />
-      <Leftnav1 />
-      <Leftnav2 />
+      <LeftRouternav />
+      <Leftnav locationList={list} />
       <main className="h-full">
-        <DefaultMap />
+        <DefaultMap locationList={list} />
       </main>
     </>
   );
