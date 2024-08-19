@@ -14,7 +14,7 @@ import Image from "next/image";
 import Link from "next/link";
 
 type Props = {
-  params: { id: string };
+  params: { id: number };
   searchParams: { [key: string]: string | string[] | undefined };
 };
 
@@ -22,31 +22,28 @@ export async function generateMetadata(
   { params }: Props,
   parent: ResolvingMetadata
 ): Promise<Metadata> {
-  // fetch data
-  const _product = RENTAL_LOCATION.filter(
-    (item) => (item.id = parseInt(params.id))
-  );
-  if (_product.length == 0) throw "대여점을 찾을 수 없음";
-  const product = _product[0];
+  const _location = RENTAL_LOCATION.filter((item) => item.id == params.id);
+  if (_location.length == 0) throw "대여점을 찾을 수 없음";
+  const location = _location[0];
 
   // optionally access and extend (rather than replace) parent metadata
   const previousImages = (await parent).openGraph?.images || [];
 
   return {
-    title: "2인거: " + product.title,
-    description: "대여점: " + product.title,
+    title: "이인거: " + location.title,
+    description: "대여점: " + location.title,
     openGraph: {
-      title: "2인거",
-      description: "대여점: " + product.title,
-      images: product.image
-        ? [product.image, ...previousImages]
+      title: "이인거",
+      description: "대여점: " + location.title,
+      images: location.image
+        ? [location.image, ...previousImages]
         : previousImages,
     },
     twitter: {
-      title: "2인거",
-      description: "대여점: " + product.title,
-      images: product.image
-        ? [product.image, ...previousImages]
+      title: "이인거",
+      description: "대여점: " + location.title,
+      images: location.image
+        ? [location.image, ...previousImages]
         : previousImages,
     },
   };
