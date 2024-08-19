@@ -21,6 +21,7 @@ export const LocationList = () => {
     <ul className="pt-10 sm:pt-5 w-full flex flex-wrap justify-center gap-10">
       {list.map((item) => (
         <SearchLocationCard
+          key={item.id}
           id={item.id}
           address={item.address}
           location={item.location}
