@@ -17,10 +17,7 @@ export const createModalSlice: StateCreator<ModalSlice, [], [], ModalSlice> = (
   isOpen: false,
   isOpening: false,
   isClosing: true,
-  handleClose: () => {
-    set({ isOpening: false, isClosing: true });
-    setTimeout(() => set({ isOpen: false }), 505);
-  },
+  handleClose: () => set({ isOpening: false, isClosing: false, isOpen: false }),
   handleOpen: (content: LocationType) => {
     set({ isOpen: true, isOpening: true, isClosing: false, content: content });
   },
