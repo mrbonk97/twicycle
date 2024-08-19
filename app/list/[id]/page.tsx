@@ -22,11 +22,10 @@ export async function generateMetadata(
   { params }: Props,
   parent: ResolvingMetadata
 ): Promise<Metadata> {
-  // read route params
-  const id = params.id;
-
   // fetch data
-  const _product = RENTAL_LOCATION.filter((item) => item.id);
+  const _product = RENTAL_LOCATION.filter(
+    (item) => (item.id = parseInt(params.id))
+  );
   if (_product.length == 0) throw "대여점을 찾을 수 없음";
   const product = _product[0];
 
