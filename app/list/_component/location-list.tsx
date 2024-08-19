@@ -1,20 +1,12 @@
-"use client";
 import { PleaseRequestCard } from "@/components/card/please-request-card";
 import { SearchLocationCard } from "@/components/card/search-location-card";
 import { RENTAL_LOCATION } from "@/constants";
-import { useSearchParams } from "next/navigation";
 
-export const LocationList = () => {
-  const searchParms = useSearchParams();
-  const region = searchParms.get("region");
-  const q = searchParms.get("q");
+interface LocationListProps {
+  list: typeof RENTAL_LOCATION;
+}
 
-  const list = RENTAL_LOCATION.filter((item) => {
-    if (region) return item.region == region;
-    if (q) return item.title.includes(q);
-    return true;
-  });
-
+export const LocationList = ({ list }: LocationListProps) => {
   if (list.length == 0) return <PleaseRequestCard />;
 
   return (
