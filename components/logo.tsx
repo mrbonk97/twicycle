@@ -1,10 +1,5 @@
-import { Bagel_Fat_One } from "next/font/google";
+import { bagelFatOne } from "@/lib/fonts";
 import Image from "next/image";
-
-export const bagelFatOne = Bagel_Fat_One({
-  subsets: ["latin"],
-  weight: ["400"],
-});
 
 export const Logo = () => {
   return (

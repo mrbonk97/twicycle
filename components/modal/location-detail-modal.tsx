@@ -1,7 +1,6 @@
 import {
   Dialog,
   DialogContent,
-  DialogDescription,
   DialogHeader,
   DialogTitle,
   DialogTrigger,
@@ -14,7 +13,6 @@ import {
   MapPinIcon,
   PhoneIcon,
 } from "lucide-react";
-import { Separator } from "../ui/separator";
 import Image from "next/image";
 
 interface LocationDetailModalProps {

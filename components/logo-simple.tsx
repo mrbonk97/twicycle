@@ -1,4 +1,4 @@
-import { bagelFatOne } from "./logo";
+import { bagelFatOne } from "@/lib/fonts";
 
 export const LogoSimple = () => {
   return (

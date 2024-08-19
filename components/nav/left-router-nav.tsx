@@ -2,9 +2,19 @@ import { MENU_LIST } from "@/constants";
 import { ThemeTogle } from "@/components/theme-toggle";
 import { CubeCard } from "@/components/card/cube-card";
 import { Moon, Sun } from "lucide-react";
+import { cn } from "@/lib/utils";
 
-export const Leftnav1 = () => (
-  <aside className="fixed z-30 hidden lg:block left-0 py-5 px-2 h-full w-20  border-r bg-background text-blue-400">
+interface LeftRouternavProps {
+  className?: string;
+}
+
+export const LeftRouternav = ({ className }: LeftRouternavProps) => (
+  <aside
+    className={cn(
+      "fixed z-30 hidden lg:block left-0 py-5 px-2 h-full w-20 border-r bg-background text-blue-400",
+      className
+    )}
+  >
     <nav className="mb-4 space-y-4">
       {MENU_LIST.map((item) => (
         <CubeCard

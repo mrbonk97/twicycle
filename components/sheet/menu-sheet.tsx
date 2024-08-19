@@ -9,7 +9,7 @@ import {
   SheetTrigger,
 } from "@/components/ui/sheet";
 import { MENU_LIST } from "@/constants";
-import { MenuIcon, Moon, Sun } from "lucide-react";
+import { Moon, Sun } from "lucide-react";
 import Link from "next/link";
 import { ThemeTogle } from "../theme-toggle";
 

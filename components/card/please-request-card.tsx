@@ -19,8 +19,8 @@ export const PleaseRequestCard = () => {
           알고 계신 장소가 있으시다면 제보해주세요
         </CardDescription>
       </CardHeader>
-      <CardContent className="flex justify-center">
-        <BirdIcon size={64} className="text-blue-400" />
+      <CardContent className="pt-20 flex justify-center">
+        <BirdIcon size={64} className="text-blue-400 hover:animate-spin" />
       </CardContent>
       <CardFooter>
         <div className="w-full flex justify-center">

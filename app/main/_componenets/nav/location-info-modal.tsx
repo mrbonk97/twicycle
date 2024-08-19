@@ -23,13 +23,13 @@ export const LocationInfoModal = () => {
   const content = useStore.use.content();
   const isMinimized = useStore.use.isMinimized();
 
-  useEffect(() => {
-    if (isOpen) setIsTotallyClosed(false);
-    if (!isOpen) setTimeout(() => setIsTotallyClosed(true), 600);
-  }, [isOpen]);
+  // useEffect(() => {
+  //   if (isOpen) setIsTotallyClosed(false);
+  //   if (!isOpen) setTimeout(() => setIsTotallyClosed(true), 600);
+  // }, [isOpen]);
 
   if (!content) return null;
-  if (isTotallyClosed) return null;
+  // if (isTotallyClosed) return null;
 
   return (
     <Card
