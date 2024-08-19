@@ -9,13 +9,53 @@ import {
   MapPinIcon,
   PhoneIcon,
 } from "lucide-react";
+import { Metadata, ResolvingMetadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 
+type Props = {
+  params: { id: string };
+  searchParams: { [key: string]: string | string[] | undefined };
+};
+
+export async function generateMetadata(
+  { params }: Props,
+  parent: ResolvingMetadata
+): Promise<Metadata> {
+  // read route params
+  const id = params.id;
+
+  // fetch data
+  const _product = RENTAL_LOCATION.filter((item) => item.id);
+  if (_product.length == 0) throw "대여점을 찾을 수 없음";
+  const product = _product[0];
+
+  // optionally access and extend (rather than replace) parent metadata
+  const previousImages = (await parent).openGraph?.images || [];
+
+  return {
+    title: "2인거: " + product.title,
+    description: "대여점: " + product.title,
+    openGraph: {
+      title: "2인거",
+      description: "대여점: " + product.title,
+      images: product.image
+        ? [product.image, ...previousImages]
+        : previousImages,
+    },
+    twitter: {
+      title: "2인거",
+      description: "대여점: " + product.title,
+      images: product.image
+        ? [product.image, ...previousImages]
+        : previousImages,
+    },
+  };
+}
+
 const ListDetailPage = ({ params }: { params: { id: number } }) => {
-  console.log(params.id);
   const _location = RENTAL_LOCATION.filter((item) => item.id == params.id);
-  if (_location.length == 0) return null;
+  if (_location.length == 0) throw "대여점을 찾을 수 없음";
   const location = _location[0];
 
   return (
@@ -28,7 +68,7 @@ const ListDetailPage = ({ params }: { params: { id: number } }) => {
             width={1500}
             height={1500}
             alt="location"
-            className="max-h-[720px] object-cover rounded"
+            className="max-h-[700px] object-cover rounded"
           />
           <hgroup className="p-1">
             <span className="flex items-center gap-1 break-keep">
@@ -41,28 +81,30 @@ const ListDetailPage = ({ params }: { params: { id: number } }) => {
             </span>
           </hgroup>
         </div>
-        <div className="p-5 space-y-5">
-          <InfoSection
-            icon={<CalendarIcon />}
-            title="이용기간"
-            description={location.businessMonth}
-          />
-          <InfoSection
-            icon={<ClockIcon />}
-            title="운영시간"
-            description={location.businessHours}
-          />
-          <InfoSection
-            icon={<CircleDollarSignIcon />}
-            title="가격"
-            description={location.price}
-          />
-          <InfoSection
-            icon={<PhoneIcon />}
-            title="연락처"
-            description={location.contact}
-          />
-          <Button className="py-6 w-full" asChild>
+        <div className="p-5 flex flex-col justify-between gap-5">
+          <div className="space-y-2">
+            <InfoSection
+              icon={<CalendarIcon />}
+              title="이용기간"
+              description={location.businessMonth}
+            />
+            <InfoSection
+              icon={<ClockIcon />}
+              title="운영시간"
+              description={location.businessHours}
+            />
+            <InfoSection
+              icon={<CircleDollarSignIcon />}
+              title="가격"
+              description={location.price}
+            />
+            <InfoSection
+              icon={<PhoneIcon />}
+              title="연락처"
+              description={location.contact}
+            />
+          </div>
+          <Button className="w-full" asChild>
             <Link
               href={`/main?id=${location.id}`}
               className="flex items-center gap-2"
@@ -88,10 +130,10 @@ interface InfoSectionProps {
 const InfoSection = ({ icon, title, description }: InfoSectionProps) => {
   return (
     <div className="flex gap-3">
-      {icon}
+      <span className="text-blue-400">{icon}</span>
       <div>
         <h4 className="-mt-0.5 font-medium text-lg">{title}</h4>
-        <p className="pl-2 mt-2 whitespace-pre-line text-base">{description}</p>
+        <p className="pl-2 mt-2 whitespace-pre-line text-sm">{description}</p>
       </div>
     </div>
   );
