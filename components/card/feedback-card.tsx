@@ -41,7 +41,7 @@ export const FeedbackCard = ({ name }: FeedbackCardProps) => {
   });
 
   async function notiFormOnSubmit(values: z.infer<typeof formSchema>) {
-    const result = await fetch("/api/send-noti", {
+    const result = await fetch("/api/send/notification", {
       headers: {
         Accept: "application/json",
         "Content-Type": "application/json",

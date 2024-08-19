@@ -20,7 +20,7 @@ export const MenuSheet = ({ children }: MenuSheetProps) => {
   return (
     <Sheet>
       <SheetTrigger asChild>{children}</SheetTrigger>
-      <SheetContent>
+      <SheetContent className="z-[104]">
         <SheetHeader>
           <SheetTitle>메뉴</SheetTitle>
         </SheetHeader>

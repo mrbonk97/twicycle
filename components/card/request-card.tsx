@@ -62,7 +62,7 @@ export const RequestCard = ({ setPlace, handleSuccess }: RequestCardProps) => {
 
   async function onSubmit(values: z.infer<typeof formSchema>) {
     setPlace(values.name);
-    const result = await fetch("/api/send", {
+    const result = await fetch("/api/send/rental-location", {
       headers: {
         Accept: "application/json",
         "Content-Type": "application/json",

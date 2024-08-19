@@ -3,15 +3,16 @@ import { NextRequest } from "next/server";
 import { Resend } from "resend";
 
 const resend = new Resend(process.env.RESEND_API_KEY);
+resend.domains.create({ name: "twicycle.site" });
 
 export async function POST(req: NextRequest) {
-  const { name } = await req.json();
+  const { name, email } = await req.json();
 
   try {
     const { data, error } = await resend.emails.send({
-      from: "Twicycle <twicycle@resend.dev>",
-      to: ["mrbonk97@gmail.com"],
-      subject: "[2인거] 장소 알림 등록 확인",
+      from: "twicycle <noreply@twicycle.site>",
+      to: [email, "hyunsuk1997@naver.com"],
+      subject: "[2인거] 신규 장소 알림 등록 확인",
       react: NotificationEmailTemplate({ name }),
     });
 
