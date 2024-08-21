@@ -10,7 +10,8 @@ export const Topnav = () => {
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     //@ts-ignore
-    router.push(`${window.location.pathname}?q=${e.target[1].value}`, {
+    const query = e.target.q.value ? `?q=${e.target.q.value}` : "";
+    router.push(`${window.location.pathname}${query}`, {
       scroll: false,
     });
   };
