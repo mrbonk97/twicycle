@@ -4,19 +4,22 @@ import { TouchEvent, useEffect, useRef, useState } from "react";
 import { RENTAL_LOCATION } from "@/constants";
 import { LocationCard } from "./location-card";
 import { BirdIcon } from "lucide-react";
+import { useSearchParams } from "next/navigation";
 
 interface LeftnavProps {
   locationList: typeof RENTAL_LOCATION;
 }
 
 export function Bottomnav({ locationList }: LeftnavProps) {
+  const sp = useSearchParams();
+  const id = sp.get("id");
+  const q = sp.get("q");
+  const ref = useRef<HTMLDivElement>(null);
   const [screenY, setScreenY] = useState({
     height: 0,
     height80p: 0,
-    height30p: 0,
+    height45p: 0,
   });
-  const [open, setOpen] = useState(false);
-  const ref = useRef<HTMLDivElement>(null);
 
   const handleTouchStart = (e: TouchEvent<HTMLDivElement>) => {
     ref.current!.style.transitionDuration = "0ms";
@@ -33,22 +36,27 @@ export function Bottomnav({ locationList }: LeftnavProps) {
   const handleTouchEnd = (e: TouchEvent<HTMLDivElement>) => {
     if (ref.current) {
       const height = parseInt(ref.current.style.height, 10);
-      if (height < screenY.height30p) ref.current.style.height = "32px";
+      if (height < screenY.height45p) ref.current.style.height = "32px";
       else ref.current.style.height = "80%";
+
       ref.current!.style.transitionDuration = "500ms";
     }
   };
 
+  // 화면 사이즈를 미리 가져와서 저장
   useEffect(() => {
-    if (!ref.current) return;
     setScreenY({
       height: window.innerHeight,
-      height30p: window.innerHeight * 0.3,
+      height45p: window.innerHeight * 0.45,
       height80p: window.innerHeight * 0.8,
     });
-    if (!open) ref.current.style.height = "32px";
-    if (open) ref.current.style.height = "80%";
-  }, [open, ref]);
+  }, []);
+
+  // 검색어가 바뀔 때마다 열어준다
+  useEffect(() => {
+    if (!ref.current) return;
+    ref.current.style.height = "80%";
+  }, [id, q]);
 
   return (
     <div
@@ -60,7 +68,11 @@ export function Bottomnav({ locationList }: LeftnavProps) {
         onTouchStart={handleTouchStart}
         onTouchMove={handleTouch}
         onTouchEnd={handleTouchEnd}
-        onClick={() => setOpen((cur) => !cur)}
+        onClick={(e) => {
+          if (!ref.current) return;
+          if (screenY.height - e.clientY < 40) ref.current.style.height = "80%";
+          else ref.current.style.height = "32px";
+        }}
         className="h-8 w-full flex2"
       >
         <div className="h-2 w-20 rounded-full bg-zinc-500" />
