@@ -18,20 +18,24 @@ export function Bottomnav({ locationList }: LeftnavProps) {
   const [open, setOpen] = useState(false);
   const ref = useRef<HTMLDivElement>(null);
 
+  const handleTouchStart = (e: TouchEvent<HTMLDivElement>) => {
+    ref.current!.style.transitionDuration = "0ms";
+  };
+
   const handleTouch = (e: TouchEvent<HTMLDivElement>) => {
-    if (ref.current) {
-      const height = screenY.height - e.touches[0].screenY;
-      if (height > screenY.height80p) return;
-      if (height < 40) return;
-      ref.current.style.height = height + "px";
-    }
+    const height = screenY.height - e.touches[0].clientY;
+    ref.current!.style.height = height + "px";
+    if (height > screenY.height80p)
+      ref.current!.style.height = screenY.height80p + "px";
+    if (height < 32) ref.current!.style.height = "32px";
   };
 
   const handleTouchEnd = (e: TouchEvent<HTMLDivElement>) => {
     if (ref.current) {
       const height = parseInt(ref.current.style.height, 10);
-      if (height < screenY.height30p) ref.current.style.height = "40px";
+      if (height < screenY.height30p) ref.current.style.height = "32px";
       else ref.current.style.height = "80%";
+      ref.current!.style.transitionDuration = "500ms";
     }
   };
 
@@ -42,7 +46,7 @@ export function Bottomnav({ locationList }: LeftnavProps) {
       height30p: window.innerHeight * 0.3,
       height80p: window.innerHeight * 0.8,
     });
-    if (!open) ref.current.style.height = "40px";
+    if (!open) ref.current.style.height = "32px";
     if (open) ref.current.style.height = "80%";
   }, [open, ref]);
 
@@ -50,12 +54,15 @@ export function Bottomnav({ locationList }: LeftnavProps) {
     <div
       ref={ref}
       role="button"
-      onTouchMove={(e) => handleTouch(e)}
-      onTouchEnd={(e) => handleTouchEnd(e)}
-      onClick={() => setOpen((cur) => !cur)}
-      className="fixed z-[101] bottom-0 md:hidden w-full bg-background rounded-t-2xl overflow-hidden border duration-500 touch-none"
+      className="fixed h-8 z-[101] bottom-0 md:hidden w-full bg-background rounded-t-2xl overflow-hidden border-t border-l border-r duration-500 touch-none"
     >
-      <div className="h-10 w-full flex2">
+      <div
+        onTouchStart={handleTouchStart}
+        onTouchMove={handleTouch}
+        onTouchEnd={handleTouchEnd}
+        onClick={() => setOpen((cur) => !cur)}
+        className="h-8 w-full flex2"
+      >
         <div className="h-2 w-20 rounded-full bg-zinc-500" />
       </div>
       <ul className="h-[calc(100%-2.5rem)] overflow-y-auto">
