@@ -11,7 +11,7 @@ interface LeftRouternavProps {
 export const LeftRouternav = ({ className }: LeftRouternavProps) => (
   <aside
     className={cn(
-      "fixed z-30 hidden lg:block left-0 py-5 px-2 h-full w-20 border-r bg-background text-blue-400",
+      "fixed z-[103] hidden lg:block left-0 py-5 px-2 h-full w-20 border-r bg-background text-blue-400",
       className
     )}
   >

@@ -18,7 +18,7 @@ export const Leftnav = ({ locationList }: LeftnavProps) => {
 
   return (
     <aside
-      className={`fixed z-20 left-0 lg:left-20 hidden md:block pb-10 h-full w-80 lg:w-96 bg-primary-foreground border-r overflow-y-auto duration-500
+      className={`fixed z-[103] left-0 lg:left-20 hidden md:block pb-10 h-full w-80 lg:w-96 bg-primary-foreground border-r overflow-y-auto duration-500
           ${isMinimized && "-translate-x-[17rem] lg:-translate-x-80"}`}
     >
       <div className="px-2 h-24 bg-secondary flex items-center justify-between border-b">
