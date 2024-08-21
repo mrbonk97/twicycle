@@ -25,6 +25,7 @@ export const Topnav1 = () => {
           <SearchIcon />
         </button>
         <Input
+          autoComplete="off"
           name="q"
           className="pl-12 w-full"
           defaultValue={query || ""}
