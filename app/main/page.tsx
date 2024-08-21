@@ -4,6 +4,7 @@ import { Leftnav } from "./_componenets/nav/left-nav";
 import { DefaultMap } from "@/components/map/default-map";
 import { LocationInfoModal } from "./_componenets/nav/location-info-modal";
 import { RENTAL_LOCATION } from "@/constants";
+import { Bottomnav } from "./_componenets/nav/bottom-nav";
 
 type Props = {
   params: { id: string };
@@ -23,9 +24,10 @@ const MainPage = ({ searchParams }: Props) => {
       <LocationInfoModal />
       <LeftRouternav />
       <Leftnav locationList={list} />
-      <main className="h-full">
+      <main className="h-screen">
         <DefaultMap locationList={list} />
       </main>
+      <Bottomnav locationList={list} />
     </>
   );
 };

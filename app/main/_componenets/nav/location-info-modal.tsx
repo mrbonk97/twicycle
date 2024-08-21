@@ -23,17 +23,11 @@ export const LocationInfoModal = () => {
   const content = useStore.use.content();
   const isMinimized = useStore.use.isMinimized();
 
-  // useEffect(() => {
-  //   if (isOpen) setIsTotallyClosed(false);
-  //   if (!isOpen) setTimeout(() => setIsTotallyClosed(true), 600);
-  // }, [isOpen]);
-
   if (!content) return null;
-  // if (isTotallyClosed) return null;
 
   return (
     <Card
-      className={`fixed z-10 w-[calc(100%-40px)] md:w-[calc(100%-22.25rem)] lg:w-[500px] h-[calc(100%-6.5rem)] overflow-y-auto duration-500 
+      className={`fixed z-[102] md:z-10 w-[calc(100%-40px)] md:w-[calc(100%-22.25rem)] lg:w-[500px] h-[calc(100%-6.5rem)] overflow-y-auto duration-500 
       ${
         isOpen &&
         !isMinimized &&

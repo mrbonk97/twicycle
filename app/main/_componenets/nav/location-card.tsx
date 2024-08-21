@@ -1,20 +1,24 @@
 "use client";
+import { cn } from "@/lib/utils";
 import { useBoundStore } from "@/stores/bound-store";
 import { createSelectors } from "@/stores/create-selector";
 import { LocationType } from "@/types";
 import { ChevronRight, LocateFixedIcon, MapPinIcon } from "lucide-react";
+import { MouseEvent } from "react";
 
 interface LocationCardProps {
+  className?: string;
   props: LocationType;
 }
 
-export const LocationCard = ({ props }: LocationCardProps) => {
+export const LocationCard = ({ className, props }: LocationCardProps) => {
   const useStore = createSelectors(useBoundStore);
   const focusedId = useStore.use.content()?.id;
   const handleOpen = useStore.use.handleOpen();
   const naverMap = useStore.use.naverMap();
 
-  const handleClick = () => {
+  const handleClick = (e: MouseEvent) => {
+    e.stopPropagation();
     if (!naverMap) return;
     naverMap.panTo({ y: props.lat, x: props.lng });
     handleOpen(props);
@@ -22,10 +26,12 @@ export const LocationCard = ({ props }: LocationCardProps) => {
 
   return (
     <li
-      className={`p-3 pr-5 h-32 w-full flex items-center justify-between border-b cursor-pointer group duration-150
-        hover:bg-secondary/50
-        ${props.id == focusedId && "bg-primary-foreground"}`}
-      onClick={handleClick}
+      className={cn(
+        "p-3 pr-5 h-32 w-full flex items-center justify-between border-b cursor-pointer group duration-150 hover:bg-secondary/50",
+        props.id == focusedId && "bg-primary-foreground",
+        className
+      )}
+      onClick={(e) => handleClick(e)}
     >
       <hgroup className="h-full">
         <h4 className={`text-lg ${props.id == focusedId && "font-medium"}`}>
