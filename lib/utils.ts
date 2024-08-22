@@ -16,7 +16,7 @@ export const addMarker = (
   content: LocationType,
   onClick: () => void
 ) => {
-  if (!map) return;
+  if (!map) return null;
 
   const coordinate = new naver.maps.LatLng(content.lat, content.lng);
   const marker = new naver.maps.Marker({
@@ -30,6 +30,8 @@ export const addMarker = (
     map.panTo(e.coord);
     onClick();
   });
+
+  return marker;
 };
 
 export const UploadButton = generateUploadButton<OurFileRouter>();
