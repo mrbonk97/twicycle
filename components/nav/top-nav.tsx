@@ -3,12 +3,14 @@ import { useRouter } from "next/navigation";
 import { MenuSheet } from "../sheet/menu-sheet";
 import { Input } from "../ui/input";
 import { MenuIcon, SearchIcon } from "lucide-react";
-import { FormEvent } from "react";
+import { FormEvent, useRef } from "react";
 
 export const Topnav = () => {
   const router = useRouter();
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    //@ts-ignore
+    e.target.q.blur();
     //@ts-ignore
     const query = e.target.q.value ? `?q=${e.target.q.value}` : "";
     router.push(`${window.location.pathname}${query}`, {
