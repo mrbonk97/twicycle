@@ -1,19 +1,14 @@
 "use client";
-
 import { TouchEvent, useEffect, useRef, useState } from "react";
 import { RENTAL_LOCATION } from "@/constants";
 import { LocationCard } from "./location-card";
 import { BirdIcon } from "lucide-react";
-import { useSearchParams } from "next/navigation";
 
 interface LeftnavProps {
   locationList: typeof RENTAL_LOCATION;
 }
 
 export function Bottomnav({ locationList }: LeftnavProps) {
-  const sp = useSearchParams();
-  const id = sp.get("id");
-  const q = sp.get("q");
   const ref = useRef<HTMLDivElement>(null);
   const [screenY, setScreenY] = useState({
     height: 0,
@@ -52,11 +47,10 @@ export function Bottomnav({ locationList }: LeftnavProps) {
     });
   }, []);
 
-  // 검색어가 바뀔 때마다 열어준다
   useEffect(() => {
     if (!ref.current) return;
     ref.current.style.height = "80%";
-  }, [id, q]);
+  }, [locationList]);
 
   return (
     <div

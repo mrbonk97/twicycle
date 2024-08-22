@@ -7,17 +7,23 @@ import { LocationInfoModal } from "./_componenets/nav/location-info-modal";
 import { RENTAL_LOCATION } from "@/constants";
 import { Bottomnav } from "./_componenets/nav/bottom-nav";
 import { useSearchParams } from "next/navigation";
+import { useEffect, useState } from "react";
 
 const MainPage = () => {
+  const [list, setList] = useState<typeof RENTAL_LOCATION>([]);
   const sp = useSearchParams();
   const id = sp.get("id");
   const q = sp.get("q");
 
-  const list = RENTAL_LOCATION.filter((item) => {
-    if (id) return item.id == parseInt(id);
-    if (q) return item.title.includes(q);
-    return true;
-  });
+  useEffect(() => {
+    const _list = RENTAL_LOCATION.filter((item) => {
+      if (id) return item.id == parseInt(id);
+      if (q) return item.title.includes(q);
+      return true;
+    });
+
+    setList(_list);
+  }, [id, q]);
 
   return (
     <>

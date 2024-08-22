@@ -4,7 +4,7 @@ import { RENTAL_LOCATION } from "@/constants";
 import { addMarker } from "@/lib/utils";
 import { useBoundStore } from "@/stores/bound-store";
 import { createSelectors } from "@/stores/create-selector";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { NaverMap } from "./naver-map";
 
 interface DefaultMapProps {
@@ -12,14 +12,21 @@ interface DefaultMapProps {
 }
 
 export const DefaultMap = ({ locationList }: DefaultMapProps) => {
+  const [markers, setMarkers] = useState<naver.maps.Marker[]>([]);
   const useStore = createSelectors(useBoundStore);
   const map = useStore.use.naverMap();
   const handleOpen = useStore.use.handleOpen();
 
   useEffect(() => {
     if (!map) return;
-    locationList.map((item) => addMarker(map, item, () => handleOpen(item)));
-  }, [map]);
+    markers.map((item) => item.setMap(null));
+    const _markers: naver.maps.Marker[] = [];
+    locationList.map((item) => {
+      const marker = addMarker(map, item, () => handleOpen(item));
+      if (marker) _markers.push(marker);
+    });
+    setMarkers(_markers);
+  }, [map, locationList]);
 
   return (
     <section className="h-full w-full">
