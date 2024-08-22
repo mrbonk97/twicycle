@@ -20,6 +20,7 @@ export const DefaultMap = ({ locationList }: DefaultMapProps) => {
   useEffect(() => {
     if (!map) return;
     markers.map((item) => item.setMap(null));
+
     const _markers: naver.maps.Marker[] = [];
     locationList.map((item) => {
       const marker = addMarker(map, item, () => handleOpen(item));
