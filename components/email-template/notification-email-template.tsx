@@ -4,9 +4,7 @@ interface EmailTemplateProps {
   name: string;
 }
 
-export const NotificationEmailTemplate: React.FC<
-  Readonly<EmailTemplateProps>
-> = ({ name }) => (
+export const NotificationEmailTemplate = ({ name }: EmailTemplateProps) => (
   <div>
     <h1>🚴‍♂️이인거🚴‍♂️</h1>
     <p className="mt-5">새로운 장소 제보에 감사드립니다.</p>

@@ -1,38 +1,32 @@
-import { type ClassValue, clsx } from "clsx";
+import { REGIONS } from "@/constants/constant";
+import { RENTAL_LOCATION } from "@/constants/rental-location";
+import { clsx, type ClassValue } from "clsx";
 import { twMerge } from "tailwind-merge";
-import {
-  generateUploadButton,
-  generateUploadDropzone,
-} from "@uploadthing/react";
-import { OurFileRouter } from "@/app/api/uploadthing/core";
-import { LocationType } from "@/types";
 
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
 }
 
-export const addMarker = (
-  map: naver.maps.Map,
-  content: LocationType,
-  onClick: () => void
-) => {
-  if (!map) return null;
+export function resolveTitle(region?: string, q?: string): string {
+  if (region) {
+    const r = REGIONS.find((item) => item.region === region);
+    if (!r) throw new Error("지역명을 찾을 수 없습니다.");
+    return r.title;
+  }
 
-  const coordinate = new naver.maps.LatLng(content.lat, content.lng);
-  const marker = new naver.maps.Marker({
-    position: coordinate,
-    map,
-  });
+  if (q) return `검색: ${q}`;
 
-  naver.maps.Event.addListener(marker, "click", function (e) {
-    marker.setAnimation(naver.maps.Animation.BOUNCE);
-    setTimeout(() => marker.setAnimation(null), 2150);
-    map.panTo(e.coord);
-    onClick();
-  });
+  return "전체";
+}
 
-  return marker;
-};
+export function resolveTitle2(id?: string, q?: string): string {
+  if (id) {
+    const location = RENTAL_LOCATION.find((item) => item.id === id);
+    if (!location) throw new Error("대여소를 찾을 수 없습니다.");
+    return location.title;
+  }
 
-export const UploadButton = generateUploadButton<OurFileRouter>();
-export const UploadDropzone = generateUploadDropzone<OurFileRouter>();
+  if (q) return `검색: ${q}`;
+
+  return "";
+}

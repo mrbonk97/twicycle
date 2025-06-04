@@ -1,44 +1,29 @@
 "use client";
+import { SearchIcon } from "lucide-react";
 import { useRouter } from "next/navigation";
-import { MenuSheet } from "../sheet/menu-sheet";
-import { Input } from "../ui/input";
-import { MenuIcon, SearchIcon } from "lucide-react";
-import { FormEvent, useRef } from "react";
+import { FormEvent } from "react";
+import { MenuSheet } from "../menu-sheet";
 
 export const Topnav = () => {
   const router = useRouter();
-  const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
+
+  const handleSearch = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    //@ts-ignore
-    e.target.q.blur();
-    //@ts-ignore
-    const query = e.target.q.value ? `?q=${e.target.q.value}` : "";
-    router.push(`${window.location.pathname}${query}`, {
-      scroll: false,
-    });
+    const formData = new FormData(e.currentTarget);
+    const q = formData.get("q")?.toString().trim();
+    const encodedQ = q ? encodeURIComponent(q) : "";
+    router.push(`/locations${encodedQ ? `?q=${encodedQ}` : ""}`);
   };
 
   return (
-    <header className="fixed z-20 top-4 md:pl-[21rem] lg:pl-[30rem] w-full flex lg:justify-end px-5 gap-2">
-      <form onSubmit={handleSubmit} className="relative w-full lg:max-w-80">
+    <header className="fixed z-10 top-0 left-0 sm:left-20 xl:left-[23rem] right-0 pl-2 pr-5 h-14 sm:h-20 flex items-center justify-between gap-5 bg-background border-b">
+      <form className="relative h-full w-full" onSubmit={handleSearch}>
         <button className="absolute top-1/2 left-4 -translate-y-1/2">
           <SearchIcon />
         </button>
-        <Input
-          autoComplete="off"
-          name="q"
-          className="pl-12 py-6 w-full lg:rounded-full"
-          placeholder="검색"
-        />
-        <MenuSheet>
-          <button
-            type="button"
-            className="absolute lg:hidden top-1/2 right-4 -translate-y-1/2"
-          >
-            <MenuIcon size={32} />
-          </button>
-        </MenuSheet>
+        <input autoComplete="off" name="q" className="pl-12 h-full w-full" placeholder="검색" />
       </form>
+      <MenuSheet />
     </header>
   );
 };

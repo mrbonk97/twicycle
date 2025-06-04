@@ -1,52 +1,40 @@
 "use client";
-import { createSelectors } from "@/stores/create-selector";
-import { useEffect, useRef } from "react";
-import { Spinner } from "../spinner";
-import { useBoundStore } from "@/stores/bound-store";
 
-interface NaverMapProps {
-  lat: number;
-  lng: number;
+import { RefObject, useEffect, useRef } from "react";
+import { initMap } from "@/components/map/map-utils";
+import { Loader2Icon } from "lucide-react";
+
+interface Props {
+  mapRef?: RefObject<naver.maps.Map | null>;
+  setMapLoad?: () => void;
+  centerPosition?: { lat: number; lng: number } | null;
 }
 
-export const NaverMap = ({ lat, lng }: NaverMapProps) => {
-  const mapRef = useRef<HTMLDivElement>(null);
-  const setNaverMap = createSelectors(useBoundStore).use.setNaverMap();
+export const NaverMap = ({ mapRef, setMapLoad, centerPosition }: Props) => {
+  const mapDivRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    const loadMap = () => {
-      if (mapRef.current == undefined) return;
+    const script = document.getElementById("naver-map-script");
+    if (!mapDivRef.current || !script) return;
 
-      let { naver } = window;
-      const location = new naver.maps.LatLng(lat, lng);
-
-      const mapOptions = {
-        center: location,
-        zoom: 16,
-      };
-
-      const map = new naver.maps.Map(mapRef.current, mapOptions);
-      setNaverMap(map);
+    const handleLoad = () => {
+      script.setAttribute("data-loaded", "true");
+      const map = initMap(mapDivRef, centerPosition);
+      if (mapRef) mapRef.current = map;
+      if (setMapLoad) setMapLoad();
     };
 
-    const { naver } = window;
-    if (naver) {
-      loadMap();
-      return;
+    if (script.getAttribute("data-loaded") === "true") {
+      handleLoad();
+    } else {
+      script.addEventListener("load", () => handleLoad());
+      return () => script.removeEventListener("load", handleLoad);
     }
-
-    document
-      .getElementById("naver-map-script")!
-      .addEventListener("load", loadMap);
-  }, []);
+  }, [centerPosition]);
 
   return (
-    <div
-      id="map"
-      className="h-full w-full flex items-center justify-center"
-      ref={mapRef}
-    >
-      <Spinner />
+    <div className="h-full w-full flex2" ref={mapDivRef}>
+      <Loader2Icon className="animate-spin text-blue-400" size={96} />
     </div>
   );
 };
