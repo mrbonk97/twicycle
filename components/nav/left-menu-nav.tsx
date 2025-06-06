@@ -14,6 +14,7 @@ export const LeftMenuNav = () => {
               <TooltipTrigger asChild>
                 <li>
                   <Link
+                    scroll={false}
                     href={item.url}
                     className="flex2 aspect-square rounded-xl bg-secondary text-blue-400 hover:opacity-80 duration-150"
                   >

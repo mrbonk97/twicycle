@@ -11,6 +11,7 @@ export const TopRegionNav = ({ curRegion }: Props) => (
       {REGIONS.map((item) => (
         <li key={item.id}>
           <Link
+            scroll={false}
             href={item.url}
             aria-selected={(item.id == 1 && curRegion == undefined) || item.region == curRegion}
             className="p-2 rounded-xl aria-selected:bg-background aria-selected:font-medium hover:bg-background/50 duration-150"

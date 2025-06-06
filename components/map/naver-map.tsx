@@ -23,15 +23,10 @@ export const NaverMap = ({ mapRef, setIsMapLoaded, centerPosition }: Props) => {
       if (setIsMapLoaded) setIsMapLoaded(true);
     };
 
-    if (script.getAttribute("data-loaded") != "true") {
-      script.setAttribute("data-loaded", "true");
-      const onLoad = () => loadMap();
-      script.addEventListener("load", onLoad);
-      return () => script.removeEventListener("load", onLoad);
-    }
-
     loadMap();
-  }, [mapRef, setIsMapLoaded, centerPosition]);
+    script.addEventListener("load", loadMap);
+    return () => script.removeEventListener("load", loadMap);
+  }, [centerPosition]);
 
   return (
     <div className="h-full w-full flex2" ref={mapDivRef}>

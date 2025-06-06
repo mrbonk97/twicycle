@@ -14,6 +14,7 @@ export const LeftRegionNav = ({ curRegion }: Props) => (
       {REGIONS.map((item) => (
         <li key={item.id}>
           <Link
+            scroll={false}
             href={item.url}
             aria-selected={(item.id == 1 && curRegion == undefined) || item.region == curRegion}
             className="block py-2 px-4 hover:bg-secondary/50 duration-150 aria-selected:font-medium aria-selected:bg-secondary"
