@@ -3,14 +3,14 @@ import Link from "next/link";
 import { Metadata } from "next";
 import { notFound } from "next/navigation";
 
-import { RegionLeftNav } from "@/components/nav/region-left-nav";
-import { Topnav } from "@/components/nav/top-nav";
-import { RegionTopNav } from "@/components/nav/region-top-nav";
 import { Button } from "@/components/ui/button";
 import { CopyButton } from "@/components/copy-button";
 import { LocationHeader } from "@/components/location-header";
 import { getRentalById } from "@/actions/action";
 import { NaverMapWithPin } from "@/components/map/naver-map-with-pin";
+import { TopLocationNav } from "@/components/nav/top-location-nav";
+import { LeftRegionNav } from "@/components/nav/left-region-nav";
+import { TopRegionNav } from "@/components/nav/top-region-nav";
 
 interface Props {
   params: Promise<{ id: string }>;
@@ -31,10 +31,10 @@ const LocationIdPage = async ({ params }: Props) => {
 
   return (
     <>
-      <Topnav />
-      <RegionLeftNav />
+      <TopLocationNav />
+      <LeftRegionNav />
       <main className="pt-14 sm:pt-20 sm:pl-20 xl:pl-[23rem]">
-        <RegionTopNav />
+        <TopRegionNav />
         <LocationHeader title={location.title} />
         <div className="mt-0 sm:mt-10 p-5 mx-auto max-w-4xl flex flex-col items-center">
           <Image

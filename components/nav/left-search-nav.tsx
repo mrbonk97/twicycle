@@ -1,9 +1,9 @@
 import Link from "next/link";
-import { LocationType } from "@/types/type";
-import { Logo } from "@/components/logo";
-import { ChevronRight, LocateFixedIcon, MapPinIcon, SearchIcon } from "lucide-react";
-import { NonExistList } from "../none-exist-list";
 import Form from "next/form";
+import { Logo } from "@/components/logo";
+import { NonExistList } from "@/components/none-exist-list";
+import { LocationType } from "@/types/type";
+import { ChevronRight, LocateFixedIcon, MapPinIcon, SearchIcon } from "lucide-react";
 
 interface Props {
   id: string | undefined;
@@ -14,9 +14,11 @@ interface Props {
 export const LeftSearchNav = ({ id, q, locations }: Props) => {
   return (
     <aside
-      className={`hidden lg:block fixed z-40 top-0 bottom-0 w-96 bg-background border-r !duration-500 overflow-y-auto left-20`}
+      className={
+        "hidden lg:block fixed z-40 top-0 bottom-0 w-96 bg-background border-r !duration-500 overflow-y-auto left-20"
+      }
     >
-      <div className="p-5 flex2 border-b bg-secondary relative">
+      <div className="px-5 py-10 flex2 border-b bg-secondary">
         <Logo />
       </div>
 

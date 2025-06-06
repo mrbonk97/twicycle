@@ -1,10 +1,9 @@
 import { Metadata } from "next";
-import { resolveTitle } from "@/lib/utils";
 
-import { Topnav } from "@/components/nav/top-nav";
-import { RegionTopNav } from "@/components/nav/region-top-nav";
-import { RegionLeftNav } from "@/components/nav/region-left-nav";
-
+import { rt } from "@/lib/utils";
+import { TopRegionNav } from "@/components/nav/top-region-nav";
+import { LeftRegionNav } from "@/components/nav/left-region-nav";
+import { TopLocationNav } from "@/components/nav/top-location-nav";
 import { RENTAL_LOCATION } from "@/constants/rental-location";
 import { LocationCard } from "@/components/location-card";
 import { LocationHeader } from "@/components/location-header";
@@ -16,29 +15,27 @@ interface Props {
 
 export async function generateMetadata({ searchParams }: Props): Promise<Metadata> {
   const sp = await searchParams;
-  const title = resolveTitle(sp["region"], sp["q"]);
+  const title = rt(sp.region, sp.q);
   return { title: `${title} | 이인거` };
 }
 
 const LoationsPage = async ({ searchParams }: Props) => {
   const sp = await searchParams;
-  const region = sp["region"];
-  const q = sp["q"];
 
-  const title = resolveTitle(region, q);
+  const title = rt(sp.region, sp.q);
 
   const locations = RENTAL_LOCATION.filter((item) => {
-    if (region) return item.region == region;
-    if (q) return item.title.includes(q[0]);
+    if (sp.region) return item.region == sp.region;
+    if (sp.q) return item.title.includes(sp.q);
     return true;
   });
 
   return (
     <>
-      <Topnav />
-      <RegionLeftNav curRegion={region} />
-      <main className="pt-14 sm:pt-20 sm:pl-20 xl:pl-[23rem] min-h-full">
-        <RegionTopNav curRegion={region} />
+      <TopLocationNav />
+      <LeftRegionNav curRegion={sp.region} />
+      <main className="pt-14 sm:pt-20 sm:pl-20 xl:pl-[23rem] min-h-[600px]">
+        <TopRegionNav curRegion={sp.region} />
         <LocationHeader title={title} />
         <ul className="p-5 flex flex-wrap gap-10 justify-center xl:justify-start">
           {locations.length == 0 && <NonExistList />}

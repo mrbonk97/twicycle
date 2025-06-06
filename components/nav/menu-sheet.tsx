@@ -1,4 +1,8 @@
 "use client";
+import Link from "next/link";
+import { useRouter } from "next/navigation";
+import { useState } from "react";
+import { useTheme } from "next-themes";
 import { Button } from "@/components/ui/button";
 import {
   Sheet,
@@ -11,11 +15,9 @@ import {
   SheetTrigger,
 } from "@/components/ui/sheet";
 import { MENU_LIST } from "@/constants/constant";
-import { bagelFatOne } from "@/lib/fonts";
-import Link from "next/link";
-import { useRouter } from "next/navigation";
-import { useState } from "react";
-import { useTheme } from "next-themes";
+import { Logo } from "@/components/logo";
+import { DarkMode } from "@/components/dark-mode/dark-mode";
+
 import { SunIcon } from "lucide-react";
 
 export function MenuSheet() {
@@ -27,12 +29,12 @@ export function MenuSheet() {
     <Sheet
       open={isOpen}
       onOpenChange={(cur) => {
-        if (window.innerWidth < 640) setIsOpen(cur);
+        if (window && window.innerWidth < 640) setIsOpen(cur);
         else router.push("/");
       }}
     >
-      <SheetTrigger className={`shrink-0 text-xl text-blue-400 ${bagelFatOne.className}`}>
-        이인거
+      <SheetTrigger asChild>
+        <Logo size="small" />
       </SheetTrigger>
       <SheetContent className="z-[105]">
         <SheetHeader>
@@ -42,20 +44,20 @@ export function MenuSheet() {
         <ul className="p-5 space-y-5">
           {MENU_LIST.map((item) => (
             <li key={`sheet` + item.id}>
-              <Button asChild className="py-6 w-full">
+              <Button asChild className="w-full">
                 <Link href={item.url}>{item.title}</Link>
               </Button>
             </li>
           ))}
-          <li>
+          <DarkMode>
             <Button
               onClick={() => setTheme(theme == "light" ? "dark" : "light")}
-              className="py-6 w-full"
+              className="w-full"
             >
               <SunIcon />
               다크모드
             </Button>
-          </li>
+          </DarkMode>
         </ul>
         <SheetFooter>
           <SheetClose asChild>

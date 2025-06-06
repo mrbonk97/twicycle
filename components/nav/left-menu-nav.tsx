@@ -1,6 +1,7 @@
 import Link from "next/link";
+import { SunIcon } from "lucide-react";
 import { MENU_LIST } from "@/constants/constant";
-import { ModeToggle } from "@/components/dark-mode-button";
+import { DarkMode } from "@/components/dark-mode/dark-mode";
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip";
 
 export const LeftMenuNav = () => {
@@ -24,7 +25,16 @@ export const LeftMenuNav = () => {
             </Tooltip>
           </TooltipProvider>
         ))}
-        <ModeToggle />
+        <TooltipProvider>
+          <Tooltip>
+            <TooltipTrigger asChild>
+              <DarkMode className="flex2 aspect-square rounded-xl bg-secondary text-blue-400 hover:opacity-80 duration-150 cursor-pointer">
+                <SunIcon />
+              </DarkMode>
+            </TooltipTrigger>
+            <TooltipContent side="right">모드변경</TooltipContent>
+          </Tooltip>
+        </TooltipProvider>
       </ul>
     </nav>
   );

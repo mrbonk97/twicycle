@@ -1,5 +1,5 @@
 import { Rq2 } from "@/components/rq2";
-import { MenuSheet } from "@/components/menu-sheet";
+import { MenuSheet } from "@/components/nav/menu-sheet";
 import { Metadata } from "next";
 
 export async function generateMetadata(): Promise<Metadata> {

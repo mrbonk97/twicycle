@@ -5,7 +5,7 @@ interface Props {
   curRegion?: string;
 }
 
-export const RegionLeftNav = ({ curRegion }: Props) => (
+export const LeftRegionNav = ({ curRegion }: Props) => (
   <aside className="hidden xl:block fixed z-20 top-0 left-20 h-full w-72 bg-background border-r">
     <div className="p-5 h-20 flex2 text-center bg-secondary border-b text-lg font-medium">
       지역별 메뉴

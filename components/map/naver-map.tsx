@@ -17,19 +17,20 @@ export const NaverMap = ({ mapRef, setIsMapLoaded, centerPosition }: Props) => {
     const script = document.getElementById("naver-map-script");
     if (!mapDivRef.current || !script) return;
 
-    const handleLoad = () => {
-      script.setAttribute("data-loaded", "true");
+    const loadMap = () => {
       const map = initMap(mapDivRef, centerPosition);
       if (mapRef) mapRef.current = map;
       if (setIsMapLoaded) setIsMapLoaded(true);
     };
 
-    if (script.getAttribute("data-loaded") === "true") {
-      handleLoad();
-    } else {
-      script.addEventListener("load", () => handleLoad());
-      return () => script.removeEventListener("load", handleLoad);
+    if (script.getAttribute("data-loaded") != "true") {
+      script.setAttribute("data-loaded", "true");
+      const onLoad = () => loadMap();
+      script.addEventListener("load", onLoad);
+      return () => script.removeEventListener("load", onLoad);
     }
+
+    loadMap();
   }, [mapRef, setIsMapLoaded, centerPosition]);
 
   return (

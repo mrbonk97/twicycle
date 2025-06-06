@@ -2,9 +2,9 @@
 
 import Link from "next/link";
 import { useState, useEffect } from "react";
-import { LocateFixedIcon, MapPinIcon, Menu } from "lucide-react";
-import { NonExistList } from "../none-exist-list";
 import { LocationType } from "@/types/type";
+import { LocateFixedIcon, MapPinIcon, Menu } from "lucide-react";
+import { NonExistList } from "@/components/none-exist-list";
 
 interface Props {
   id: string | undefined;
@@ -32,7 +32,9 @@ export const MobileBottomNav = ({ id, q, locations }: Props) => {
         <Menu size={16} />
       </button>
 
-      <h4 className="p-5 text-lg font-medium">{q ? `검색: ${q}` : "자전거 대여소"}</h4>
+      <h4 onClick={() => setIsExpanded((cur) => !cur)} className="p-5 text-lg font-medium">
+        {q ? `검색: ${q}` : "자전거 대여소"}
+      </h4>
 
       <ul className="h-full overflow-y-auto">
         {locations.length === 0 && <NonExistList />}

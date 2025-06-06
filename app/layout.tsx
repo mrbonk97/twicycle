@@ -1,8 +1,8 @@
 import "./globals.css";
 import type { Metadata } from "next";
 import { notoSans } from "@/lib/fonts";
-import { ThemeProvider } from "@/components/theme-provider";
 import { NaverMapScript } from "@/components/map/naver-map-script";
+import { ThemeProvider } from "@/components/dark-mode/theme-provider";
 
 export const metadata: Metadata = {
   title: "이인거",

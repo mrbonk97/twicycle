@@ -23,11 +23,12 @@ export const LocationModal = ({ location, isMinimized, close }: Props) => {
       </button>
       <CardContent className="mt-5">
         <Image
-          src={location.image || "/images/location-placeholder.jpg"}
-          alt={location.title}
+          priority
           height={288}
           width={450}
-          className="mx-auto h-72 object-cover rounded-xl"
+          alt={location.title}
+          className="mx-auto object-cover rounded-xl"
+          src={location.image || "/images/location-placeholder.jpg"}
         />
         <section className="mt-5 py-5 border-y text-md font-medium">
           <p className="text-center">{location.address}</p>

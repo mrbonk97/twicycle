@@ -19,10 +19,11 @@ export const LocationCard = ({ loc }: Props) => {
           </CardHeader>
           <CardContent>
             <Image
-              src={image || "/images/location-placeholder.jpg"}
-              width={512}
-              height={512}
+              priority
+              width={516}
+              height={208}
               alt="location"
+              src={image || "/images/location-placeholder.jpg"}
               className="h-52 object-cover border rounded-lg"
             />
           </CardContent>

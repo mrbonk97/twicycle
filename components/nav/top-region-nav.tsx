@@ -5,7 +5,7 @@ interface Props {
   curRegion?: string;
 }
 
-export const RegionTopNav = ({ curRegion }: Props) => (
+export const TopRegionNav = ({ curRegion }: Props) => (
   <aside className="xl:hidden p-5 bg-secondary border-b">
     <ul className="text-sm flex items-center justify-center flex-wrap gap-5">
       {REGIONS.map((item) => (

@@ -2,10 +2,11 @@ import { Home } from "@/components/home";
 import { RENTAL_LOCATION } from "@/constants/rental-location";
 
 import { LeftMenuNav } from "@/components/nav/left-menu-nav";
-import { TopHomeNav } from "@/components/nav/top-nav-location";
+import { TopHomeNav } from "@/components/nav/top-home-nav";
 import { LeftSearchNav } from "@/components/nav/left-search-nav";
 import { MobileBottomNav } from "@/components/nav/mobile-bottom-nav";
 import { Metadata } from "next";
+import { rt2 } from "@/lib/utils";
 
 interface Props {
   searchParams: Promise<{ [key: string]: string | undefined }>;
@@ -13,22 +14,7 @@ interface Props {
 
 export async function generateMetadata({ searchParams }: Props): Promise<Metadata> {
   const sp = await searchParams;
-
-  if (sp.id) {
-    const location = RENTAL_LOCATION.find((item) => item.id == sp.id);
-    if (!location) throw new Error(`Id에 해당하는 대여소가 없습니다. ID: ${sp.id}`);
-
-    return {
-      title: location.title,
-    };
-  }
-
-  if (sp.q)
-    return {
-      title: `검색: ${sp.q} | 이인거`,
-    };
-
-  return { title: `이인거` };
+  return { title: `${rt2(sp.id, sp.q)} | 이인거` };
 }
 
 const HomePage = async ({ searchParams }: Props) => {
