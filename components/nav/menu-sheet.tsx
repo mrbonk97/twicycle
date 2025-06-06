@@ -15,10 +15,10 @@ import {
   SheetTrigger,
 } from "@/components/ui/sheet";
 import { MENU_LIST } from "@/constants/constant";
-import { Logo } from "@/components/logo";
 import { DarkMode } from "@/components/dark-mode/dark-mode";
 
 import { SunIcon } from "lucide-react";
+import { bagelFatOne } from "@/lib/fonts";
 
 export function MenuSheet() {
   const router = useRouter();
@@ -33,8 +33,8 @@ export function MenuSheet() {
         else router.push("/");
       }}
     >
-      <SheetTrigger asChild>
-        <Logo size="small" />
+      <SheetTrigger className={`shrink-0 text-xl text-blue-400 ${bagelFatOne.className}`}>
+        이인거
       </SheetTrigger>
       <SheetContent className="z-[105]">
         <SheetHeader>
