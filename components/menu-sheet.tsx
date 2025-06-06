@@ -4,6 +4,7 @@ import {
   Sheet,
   SheetClose,
   SheetContent,
+  SheetDescription,
   SheetFooter,
   SheetHeader,
   SheetTitle,
@@ -14,10 +15,13 @@ import { bagelFatOne } from "@/lib/fonts";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
+import { useTheme } from "next-themes";
+import { SunIcon } from "lucide-react";
 
 export function MenuSheet() {
-  const [isOpen, setIsOpen] = useState(false);
   const router = useRouter();
+  const { setTheme, theme } = useTheme();
+  const [isOpen, setIsOpen] = useState(false);
 
   return (
     <Sheet
@@ -30,9 +34,10 @@ export function MenuSheet() {
       <SheetTrigger className={`shrink-0 text-xl text-blue-400 ${bagelFatOne.className}`}>
         이인거
       </SheetTrigger>
-      <SheetContent>
+      <SheetContent className="z-[105]">
         <SheetHeader>
           <SheetTitle>메뉴</SheetTitle>
+          <SheetDescription className="sr-only">이인거 메뉴입니다.</SheetDescription>
         </SheetHeader>
         <ul className="p-5 space-y-5">
           {MENU_LIST.map((item) => (
@@ -42,6 +47,15 @@ export function MenuSheet() {
               </Button>
             </li>
           ))}
+          <li>
+            <Button
+              onClick={() => setTheme(theme == "light" ? "dark" : "light")}
+              className="py-6 w-full"
+            >
+              <SunIcon />
+              다크모드
+            </Button>
+          </li>
         </ul>
         <SheetFooter>
           <SheetClose asChild>

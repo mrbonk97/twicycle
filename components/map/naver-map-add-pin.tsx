@@ -28,7 +28,7 @@ export const NaverMapAddPin = ({ setCoord }: Props) => {
 
       setCoord(`lat: ${e.coord.y}, lng: ${e.coord.x}`);
     });
-  }, [isMapLoaded]);
+  }, [isMapLoaded, setCoord]);
 
-  return <NaverMap mapRef={mapRef} setMapLoad={() => setIsMapLoaded(true)} />;
+  return <NaverMap mapRef={mapRef} setIsMapLoaded={setIsMapLoaded} />;
 };

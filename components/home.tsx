@@ -1,14 +1,12 @@
 "use client";
 
 import { useCallback, useEffect, useRef, useState } from "react";
-import { LocationType } from "@/types/type";
-import { LeftSearchNav } from "@/components/nav/left-search-nav";
-import { MobileBottomNav } from "./nav/mobile-bottom-nav";
-import { TopHomeNav } from "./nav/top-nav-location";
-import { LocationModal } from "./location-modal";
-import { NaverMap } from "./map/naver-map";
-import { addMarker } from "./map/map-utils";
 import { useRouter } from "next/navigation";
+
+import { LocationType } from "@/types/type";
+import { LocationModal } from "@/components/location-modal";
+import { NaverMap } from "@/components/map/naver-map";
+import { addMarker } from "@/components/map/map-utils";
 
 interface Props {
   q: string | undefined;
@@ -18,34 +16,27 @@ interface Props {
 
 export const Home = ({ q, locations, location }: Props) => {
   const router = useRouter();
-  const markerRef = useRef<naver.maps.Marker[]>([]);
   const mapRef = useRef<naver.maps.Map>(null);
+  const markerRef = useRef<naver.maps.Marker[]>([]);
 
-  const [isOpen, setIsOpen] = useState(location ? true : false);
+  const [isOpen, setIsOpen] = useState(false);
   const [isMapLoaded, setIsMapLoaded] = useState(false);
-  const [isMinimized, setIsMinimized] = useState(false);
 
   const handleMarkerClick = useCallback(
     (l: LocationType) => {
       const params = new URLSearchParams({ id: l.id });
       if (q) params.set("q", q);
-      router.replace(`/?${params.toString()}`);
-      setIsOpen(true);
+      router.push(`/?${params.toString()}`);
     },
     [q, router]
   );
 
-  const handleOpen = (l: LocationType) => {
-    const marker = markerRef.current.find((item) => item.getTitle() == l.id);
-
-    if (marker) {
-      const map = marker.getMap();
-      const pos = marker.getPosition();
-      map?.panTo(pos);
+  useEffect(() => {
+    if (location) {
+      setIsOpen(true);
+      if (mapRef.current) mapRef.current.panTo({ lat: location.lat, lng: location.lng });
     }
-
-    setIsOpen(true);
-  };
+  }, [location]);
 
   useEffect(() => {
     if (!isMapLoaded || !mapRef.current) return;
@@ -60,31 +51,11 @@ export const Home = ({ q, locations, location }: Props) => {
   }, [isMapLoaded, locations, handleMarkerClick]);
 
   return (
-    <>
-      <TopHomeNav />
-      <LeftSearchNav
-        curQ={q}
-        handleOpen={handleOpen}
-        location={location}
-        locations={locations}
-        isMinimized={isMinimized}
-        handleMinimize={() => setIsMinimized((cur) => !cur)}
-      />
+    <main className="lg:pl-20 h-full w-full">
       {isOpen && location && (
-        <LocationModal
-          isMinimized={isMinimized}
-          location={location}
-          close={() => setIsOpen(false)}
-        />
+        <LocationModal location={location} isMinimized={false} close={() => setIsOpen(false)} />
       )}
-      <MobileBottomNav curQ={q} location={location} locations={locations} handleOpen={handleOpen} />
-      <main className="pl-0 sm:pl:20 h-full">
-        <NaverMap
-          mapRef={mapRef}
-          setMapLoad={() => setIsMapLoaded(true)}
-          centerPosition={location ? { lat: location.lat, lng: location.lng } : null}
-        />
-      </main>
-    </>
+      <NaverMap mapRef={mapRef} setIsMapLoaded={setIsMapLoaded} />
+    </main>
   );
 };

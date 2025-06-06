@@ -5,7 +5,7 @@ import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/comp
 
 export const LeftMenuNav = () => {
   return (
-    <nav className="hidden sm:block fixed z-50 top-0 bottom-0 left-0 w-20 border-r bg-background">
+    <nav className="hidden lg:block fixed z-50 top-0 bottom-0 left-0 w-20 border-r bg-background">
       <ul className="p-2 space-y-5">
         {MENU_LIST.map((item) => (
           <TooltipProvider key={item.id}>

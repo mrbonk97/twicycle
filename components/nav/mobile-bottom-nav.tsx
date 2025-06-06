@@ -1,64 +1,64 @@
 "use client";
 
-import { Drawer, DrawerContent, DrawerHeader, DrawerTitle } from "@/components/ui/drawer";
-import { LocationType } from "@/types/type";
-import { LocateFixedIcon, MapPinIcon } from "lucide-react";
 import Link from "next/link";
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { LocateFixedIcon, MapPinIcon, Menu } from "lucide-react";
 import { NonExistList } from "../none-exist-list";
+import { LocationType } from "@/types/type";
 
 interface Props {
-  curQ: string | undefined;
-  location: LocationType | undefined;
+  id: string | undefined;
+  q: string | undefined;
   locations: LocationType[];
-  handleOpen: (l: LocationType) => void;
 }
 
-const snapPoints = ["220px", 1];
+export const MobileBottomNav = ({ id, q, locations }: Props) => {
+  const [isExpanded, setIsExpanded] = useState(false);
 
-export const MobileBottomNav = ({ curQ, location, locations, handleOpen }: Props) => {
-  const [snap, setSnap] = useState<number | string | null>(snapPoints[0]);
+  useEffect(() => {
+    if (q) setIsExpanded(locations.length != 1);
+    if (id) setIsExpanded(false);
+  }, [id, q, locations.length]);
 
   return (
-    <Drawer
-      open={true}
-      modal={false}
-      dismissible={false}
-      snapPoints={snapPoints}
-      activeSnapPoint={snap}
-      setActiveSnapPoint={setSnap}
+    <nav
+      className={`fixed z-[101] lg:hidden !duration-500 ease-in-out left-0 bottom-0 right-0 h-[85%] rounded-t-2xl border-t bg-background !shadow-lg
+        ${isExpanded ? "translate-y-0" : "translate-y-[calc(100%-64px)]"}`}
     >
-      <DrawerContent className="fixed sm:hidden z-[101] bottom-0 left-0 right-0 h-full max-h-[97%]">
-        <DrawerHeader>
-          <DrawerTitle>대여소</DrawerTitle>
-        </DrawerHeader>
-        <ul className="overflow-y-auto">
-          {locations.length == 0 && <NonExistList />}
+      <button
+        onClick={() => setIsExpanded((cur) => !cur)}
+        className="absolute left-1/2 -translate-x-1/2 -top-10 rounded-full p-2 bg-background hover:opacity-80"
+      >
+        <Menu size={16} />
+      </button>
 
-          {locations.map((item) => {
-            return (
-              <li key={`mobile-list-${item.id}`}>
-                <Link
-                  onClick={() => handleOpen(item)}
-                  aria-checked={location && item.id == location.id}
-                  href={curQ ? `/?id=${item.id}&q=${curQ}` : `/?id=${item.id}`}
-                  className="block p-5 border-b space-y-1 aria-checked:bg-secondary"
-                >
-                  <h4 className="font-medium">{item.title}</h4>
-                  <p className="flex items-center gap-1 text-sm">
-                    <MapPinIcon size={12} />
-                    {item.address}
-                  </p>
-                  <p className="flex items-center gap-1 text-sm">
-                    <LocateFixedIcon size={12} />
-                    {item.location}
-                  </p>
-                </Link>
-              </li>
-            );
-          })}
-        </ul>
-      </DrawerContent>
-    </Drawer>
+      <h4 className="p-5 text-lg font-medium">{q ? `검색: ${q}` : "자전거 대여소"}</h4>
+
+      <ul className="h-full overflow-y-auto">
+        {locations.length === 0 && <NonExistList />}
+        {locations.map((item) => (
+          <li key={`list-${item.id}`}>
+            <Link
+              href={q ? `/?id=${item.id}&q=${q}` : `/?id=${item.id}`}
+              scroll={false}
+              aria-checked={item.id == id}
+              className="p-5 border-b flex gap-2 items-center justify-between aria-checked:bg-secondary"
+            >
+              <hgroup className="space-y-1">
+                <h4 className="font-medium">{item.title}</h4>
+                <p className="flex items-center gap-1 text-sm">
+                  <MapPinIcon size={12} />
+                  {item.address}
+                </p>
+                <p className="flex items-center gap-1 text-sm">
+                  <LocateFixedIcon size={12} />
+                  {item.location}
+                </p>
+              </hgroup>
+            </Link>
+          </li>
+        ))}
+      </ul>
+    </nav>
   );
 };

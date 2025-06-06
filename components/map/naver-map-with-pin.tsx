@@ -22,7 +22,7 @@ export const NaverMapWithPin = ({ location }: Props) => {
   return (
     <NaverMap
       mapRef={mapRef}
-      setMapLoad={() => setIsMapLoaded(true)}
+      setIsMapLoaded={setIsMapLoaded}
       centerPosition={{ lat: location.lat, lng: location.lng }}
     />
   );

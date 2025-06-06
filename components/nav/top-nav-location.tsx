@@ -17,7 +17,7 @@ export const TopHomeNav = () => {
   };
 
   return (
-    <header className="fixed z-10 sm:hidden top-0 left-0 right-0 p-2 px-5 h-12 flex items-center justify-between gap-2 bg-background">
+    <header className="fixed z-10 lg:hidden top-0 left-0 right-0 p-2 px-5 h-12 flex items-center justify-between gap-2 bg-background">
       <form className="relative h-full w-full" onSubmit={handleSearch}>
         <button type="submit" className="absolute top-1/2 left-4 -translate-y-1/2 pr-2 border-r">
           <SearchIcon size={16} />

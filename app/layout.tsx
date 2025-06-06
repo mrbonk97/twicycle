@@ -3,7 +3,6 @@ import type { Metadata } from "next";
 import { notoSans } from "@/lib/fonts";
 import { ThemeProvider } from "@/components/theme-provider";
 import { NaverMapScript } from "@/components/map/naver-map-script";
-import { LeftMenuNav } from "@/components/nav/left-menu-nav";
 
 export const metadata: Metadata = {
   title: "이인거",
@@ -20,7 +19,6 @@ const RootLayout = ({ children }: Props) => {
       <NaverMapScript />
       <body className={`${notoSans.className} antialiased`}>
         <ThemeProvider attribute="class" defaultTheme="dark" enableSystem disableTransitionOnChange>
-          <LeftMenuNav />
           {children}
         </ThemeProvider>
       </body>

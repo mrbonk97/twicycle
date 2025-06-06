@@ -45,10 +45,7 @@ export const addMarker = (
     draggable: draggable,
   });
 
-  marker.addListener("click", () => {
-    if (onClick) onClick();
-    map.panTo(pos);
-  });
+  if (onClick) marker.addListener("click", onClick);
 
   return marker;
 };
