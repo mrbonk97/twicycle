@@ -1,16 +1,15 @@
 "use client";
 
-import { Dispatch, RefObject, SetStateAction, useEffect, useRef } from "react";
+import { Dispatch, SetStateAction, useEffect, useRef } from "react";
 import { initMap } from "@/components/map/map-utils";
 import { Loader2Icon } from "lucide-react";
 
 interface Props {
-  mapRef?: RefObject<naver.maps.Map | null>;
-  setIsMapLoaded?: Dispatch<SetStateAction<boolean>>;
+  setMap?: Dispatch<SetStateAction<naver.maps.Map | null>>;
   centerPosition?: { lat: number; lng: number } | null;
 }
 
-export const NaverMap = ({ mapRef, setIsMapLoaded, centerPosition }: Props) => {
+export const NaverMap = ({ setMap, centerPosition }: Props) => {
   const mapDivRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -19,14 +18,17 @@ export const NaverMap = ({ mapRef, setIsMapLoaded, centerPosition }: Props) => {
 
     const loadMap = () => {
       const map = initMap(mapDivRef, centerPosition);
-      if (mapRef) mapRef.current = map;
-      if (setIsMapLoaded) setIsMapLoaded(true);
+      if (setMap) setMap(map);
     };
 
-    loadMap();
-    script.addEventListener("load", loadMap);
-    return () => script.removeEventListener("load", loadMap);
-  }, [centerPosition]);
+    const scriptLoaded = script.getAttribute("data-loaded");
+
+    if (scriptLoaded == "true") loadMap();
+    else {
+      script.addEventListener("load", loadMap);
+      return () => script.removeEventListener("load", loadMap);
+    }
+  }, [setMap]);
 
   return (
     <div className="h-full w-full flex2" ref={mapDivRef}>

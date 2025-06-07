@@ -14,7 +14,7 @@ interface Props {
 
 export async function generateMetadata({ searchParams }: Props): Promise<Metadata> {
   const sp = await searchParams;
-  return { title: `${rt2(sp.id, sp.q)} | 이인거` };
+  return { title: rt2(sp.id, sp.q) };
 }
 
 const HomePage = async ({ searchParams }: Props) => {

@@ -34,6 +34,7 @@ export const addMarker = (
   map: naver.maps.Map,
   location: LocationType,
   draggable = false,
+  isFocused = false,
   onClick?: () => void
 ) => {
   const pos = new naver.maps.LatLng(location.lat, location.lng);
@@ -43,6 +44,7 @@ export const addMarker = (
     position: pos,
     title: location.id,
     draggable: draggable,
+    icon: isFocused ? "/images/marker-focus.png" : undefined,
   });
 
   if (onClick) marker.addListener("click", onClick);
@@ -50,15 +52,8 @@ export const addMarker = (
   return marker;
 };
 
-export const addMarker2 = (
-  map: naver.maps.Map,
-  coord: {
-    lat: number;
-    lng: number;
-  }
-) => {
-  const pos = new naver.maps.LatLng(coord.lat, coord.lng);
-
+export const addMarker2 = (map: naver.maps.Map, lat: number, lng: number) => {
+  const pos = new naver.maps.LatLng(lat, lng);
   const marker = new naver.maps.Marker({
     map,
     position: pos,

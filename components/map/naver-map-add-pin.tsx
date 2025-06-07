@@ -1,8 +1,8 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import { NaverMap } from "./naver-map";
-import { addMarker2 } from "./map-utils";
+import { NaverMap } from "@/components/map/naver-map";
+import { addMarker2 } from "@/components/map/map-utils";
 
 interface Props {
   setCoord: (c: string) => void;
@@ -10,25 +10,23 @@ interface Props {
 
 export const NaverMapAddPin = ({ setCoord }: Props) => {
   const markerRef = useRef<naver.maps.Marker>(null);
-  const mapRef = useRef<naver.maps.Map>(null);
-
-  const [isMapLoaded, setIsMapLoaded] = useState(false);
+  const [map, setMap] = useState<naver.maps.Map | null>(null);
 
   useEffect(() => {
-    if (!isMapLoaded || !mapRef.current) return;
+    if (!map) return;
 
-    mapRef.current.addListener("click", (e) => {
+    map.addListener("click", (e) => {
       if (markerRef.current) {
         const pos = new naver.maps.LatLng(e.coord.y, e.coord.x);
         markerRef.current.setPosition(pos);
         setCoord(`lat: ${e.coord.y}, lng: ${e.coord.x}`);
       } else {
-        markerRef.current = addMarker2(mapRef.current!, { lat: e.coord.y, lng: e.coord.x });
+        markerRef.current = addMarker2(map, e.coord.y, e.coord.x);
       }
 
       setCoord(`lat: ${e.coord.y}, lng: ${e.coord.x}`);
     });
-  }, [isMapLoaded, setCoord]);
+  }, [map, setCoord]);
 
-  return <NaverMap mapRef={mapRef} setIsMapLoaded={setIsMapLoaded} />;
+  return <NaverMap setMap={setMap} />;
 };

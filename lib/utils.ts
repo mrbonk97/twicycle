@@ -23,9 +23,9 @@ export function rt2(id?: string | undefined, q?: string | undefined) {
   if (id) {
     const location = RENTAL_LOCATION.find((item) => item.id == id);
     if (!location) throw new Error(`Id에 해당하는 대여소를 찾을 수 없습니다. Id: ${id}`);
-    return location.title;
+    return `${location.title} | 이인거`;
   }
 
-  if (q) return `검색: ${q}`;
-  return "지도";
+  if (q) return `검색: ${q} | 이인거`;
+  return "이인거";
 }

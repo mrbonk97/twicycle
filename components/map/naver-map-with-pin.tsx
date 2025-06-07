@@ -1,29 +1,21 @@
 "use client";
 
 import { LocationType } from "@/types/type";
-import { NaverMap } from "./naver-map";
-import { useEffect, useRef, useState } from "react";
-import { addMarker } from "./map-utils";
+import { NaverMap } from "@/components/map/naver-map";
+import { useEffect, useState } from "react";
+import { addMarker } from "@/components/map/map-utils";
 
 interface Props {
   location: LocationType;
 }
 
 export const NaverMapWithPin = ({ location }: Props) => {
-  const mapRef = useRef<naver.maps.Map>(null);
-  const [isMapLoaded, setIsMapLoaded] = useState(false);
+  const [map, setMap] = useState<naver.maps.Map | null>(null);
 
   useEffect(() => {
-    if (isMapLoaded && mapRef.current) {
-      addMarker(mapRef.current, location, false);
-    }
-  }, [location, isMapLoaded]);
+    if (!map) return;
+    addMarker(map, location, false, false);
+  }, [location, map]);
 
-  return (
-    <NaverMap
-      mapRef={mapRef}
-      setIsMapLoaded={setIsMapLoaded}
-      centerPosition={{ lat: location.lat, lng: location.lng }}
-    />
-  );
+  return <NaverMap setMap={setMap} centerPosition={{ lat: location.lat, lng: location.lng }} />;
 };
