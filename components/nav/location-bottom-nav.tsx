@@ -43,7 +43,7 @@ export function LocationBottomnav({ q, location, locations }: Props) {
           <Drawer.Title className="sr-only">대여소 목록</Drawer.Title>
           <Drawer.Description className="sr-only">지도에서 표시되는 대여소 목록입니다.</Drawer.Description>
           <div className="h-full w-[200%] overflow-x-hidden">
-            <div className={`h-full grid grid-cols-2 duration-300 ${location ? "-translate-x-1/2" : ""}`}>
+            <div className={`h-full grid grid-cols-2 ${location ? "-translate-x-1/2" : "duration-300"}`}>
               <LocationList q={q} locations={locations} />
               <LocationInfoArticle q={q} location={location} />
             </div>
