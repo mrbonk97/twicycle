@@ -23,11 +23,7 @@ export function NaverMapPinnable({ className }: Props) {
       throw new Error("지도를 초기화하는 중 오류발생");
     }
 
-    let pos = new naver.maps.LatLng(37.5850113953, 126.8205125895);
-    const mapOptions = {
-      center: pos,
-      zoom: 16,
-    };
+    const pos = new naver.maps.LatLng(37.5850113953, 126.8205125895);
 
     const _map = new naver.maps.Map(mapDivRef.current, {
       center: pos,
