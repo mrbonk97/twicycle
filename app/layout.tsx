@@ -1,29 +1,34 @@
 import "./globals.css";
 import type { Metadata } from "next";
-import { notoSans } from "@/lib/fonts";
-import { NaverMapScript } from "@/components/map/naver-map-script";
-import { ThemeProvider } from "@/components/dark-mode/theme-provider";
+import { Noto_Sans_KR } from "next/font/google";
+import { ThemeProvider } from "@/components/theme-provider";
+
+const notoSans = Noto_Sans_KR({
+  subsets: ["latin"],
+});
 
 export const metadata: Metadata = {
   title: "이인거",
-  description: "이인승 자전거 대여 위치찾기 서비스",
+  description: "자전거 대여소를 찾아드립니다.",
 };
 
 interface Props {
-  children: React.ReactNode;
+  children: Readonly<React.ReactNode>;
 }
 
-const RootLayout = ({ children }: Props) => {
+export default function RootLayout({ children }: Props) {
   return (
     <html lang="ko" suppressHydrationWarning>
-      <NaverMapScript />
       <body className={`${notoSans.className} antialiased`}>
-        <ThemeProvider attribute="class" defaultTheme="dark" enableSystem disableTransitionOnChange>
+        <ThemeProvider
+          attribute="class"
+          defaultTheme="light"
+          enableSystem
+          disableTransitionOnChange
+        >
           {children}
         </ThemeProvider>
       </body>
     </html>
   );
-};
-
-export default RootLayout;
+}

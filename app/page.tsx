@@ -1,45 +1,29 @@
-import { Home } from "@/components/home";
-import { RENTAL_LOCATION } from "@/constants/rental-location";
-
-import { LeftMenuNav } from "@/components/nav/left-menu-nav";
-import { TopHomeNav } from "@/components/nav/top-home-nav";
-import { LeftSearchNav } from "@/components/nav/left-search-nav";
-import { MobileBottomNav } from "@/components/nav/mobile-bottom-nav";
-import { Metadata } from "next";
-import { rt2 } from "@/lib/utils";
+import { NaverMap } from "@/components/map/naver-map";
+import { LeftNav } from "@/components/nav/left-nav";
+import { MainLeftSection } from "@/components/section/main-left-section";
+import { TopnavMobile } from "@/components/nav/top-nav-mobile";
+import { BottomNavMobile } from "@/components/nav/bottom-nav-mobile";
+import { getFilteredLocations2 } from "@/lib/utils";
 
 interface Props {
-  searchParams: Promise<{ [key: string]: string | undefined }>;
+  searchParams: Promise<{ id: string; q: string }>;
 }
 
-export async function generateMetadata({ searchParams }: Props): Promise<Metadata> {
-  const sp = await searchParams;
-  return { title: rt2(sp.id, sp.q) };
-}
-
-const HomePage = async ({ searchParams }: Props) => {
-  const sp = await searchParams;
-
-  const locations = RENTAL_LOCATION.filter((item) => {
-    if (sp.q) return item.address.includes(sp.q) || item.title.includes(sp.q);
-    return true;
-  });
-
-  const location = RENTAL_LOCATION.find((item) => {
-    if (locations.length == 1) return item.id == locations[0].id;
-    else if (sp.id) return item.id == sp.id;
-    return false;
-  });
+export default async function Home({ searchParams }: Props) {
+  const { id, q } = await searchParams;
+  const locations = getFilteredLocations2(q, undefined);
+  const location = id ? locations.find((l) => l.id == id) : null;
+  if (id && !location) throw new Error(`장소를 찾을 수 없습니다. ID: ${id}`);
 
   return (
     <>
-      <TopHomeNav />
-      <LeftMenuNav />
-      <LeftSearchNav id={sp.id} q={sp.q} locations={locations} />
-      <MobileBottomNav id={sp.id} q={sp.q} locations={locations} />
-      <Home q={sp.q} location={location} locations={locations} />
+      <LeftNav />
+      <TopnavMobile baseUrl="/" />
+      <MainLeftSection q={q} location={location} locations={locations} />
+      <BottomNavMobile q={q} location={location} locations={locations} />
+      <main className="sm:pl-20 h-full">
+        <NaverMap location={location} locations={locations} />
+      </main>
     </>
   );
-};
-
-export default HomePage;
+}
