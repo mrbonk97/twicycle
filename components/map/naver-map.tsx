@@ -3,7 +3,7 @@
 import { cn, LocationType } from "@/lib/utils";
 import { useRouter } from "next/navigation";
 import Script from "next/script";
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 
 interface Props {
   q: string | undefined;
@@ -13,27 +13,35 @@ interface Props {
 }
 
 export function NaverMap({ q, location, locations, className }: Props) {
+  const mapDivRef = useRef<HTMLDivElement>(null);
+  const [map, setMap] = useState<naver.maps.Map | null>(null);
   const markerRef = useRef<naver.maps.Marker[]>([]);
-  const mapRef = useRef<naver.maps.Map | null>(null);
   const router = useRouter();
 
   const initMap = () => {
-    if (!mapRef.current) {
-      let pos = new naver.maps.LatLng(37.5850113953, 126.8205125895);
-      if (location) pos = new naver.maps.LatLng(location.lat, location.lng);
-      else if (locations.length > 0) pos = new naver.maps.LatLng(locations[0].lat, locations[0].lng);
-
-      // 최초 1회만 생성
-      const mapOptions = {
-        center: pos,
-        zoom: 16,
-      };
-      mapRef.current = new naver.maps.Map("map", mapOptions);
+    if (!mapDivRef.current) {
+      throw new Error("지도를 초기화하는 중 오류발생");
     }
+
+    let pos = new naver.maps.LatLng(37.5850113953, 126.8205125895);
+    if (location) pos = new naver.maps.LatLng(location.lat, location.lng);
+    else if (locations.length > 0) pos = new naver.maps.LatLng(locations[0].lat, locations[0].lng);
+
+    const _map = new naver.maps.Map(mapDivRef.current, {
+      center: pos,
+      zoom: 16,
+    });
+
+    setMap(_map);
   };
 
   useEffect(() => {
-    if (!mapRef.current) return;
+    if (!map) {
+      if (typeof window !== "undefined" && typeof window.naver !== "undefined") {
+        initMap();
+      }
+      return;
+    }
 
     // 마커 갱신
     markerRef.current.forEach((marker) => marker.setMap(null));
@@ -42,7 +50,7 @@ export function NaverMap({ q, location, locations, className }: Props) {
     locations.forEach((loc) => {
       const pos = new naver.maps.LatLng(loc.lat, loc.lng);
       const marker = new naver.maps.Marker({
-        map: mapRef.current!,
+        map: map,
         position: pos,
         draggable: false,
       });
@@ -60,9 +68,9 @@ export function NaverMap({ q, location, locations, className }: Props) {
     // location이 있으면 지도 중심 이동
     if (location) {
       const pos = new naver.maps.LatLng(location.lat, location.lng);
-      mapRef.current.panTo(pos);
+      map.panTo(pos);
     }
-  }, [q, locations, location, router]);
+  }, [map, q, locations, location, router]);
 
   return (
     <>
@@ -72,7 +80,7 @@ export function NaverMap({ q, location, locations, className }: Props) {
         strategy="afterInteractive"
         onLoad={initMap}
       />
-      <div id="map" className={cn("h-full w-full", className)} />
+      <div ref={mapDivRef} className={cn("h-full w-full", className)} />
     </>
   );
 }
