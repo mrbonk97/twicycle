@@ -22,13 +22,21 @@ export function LocationBottomnav({ q, location, locations }: Props) {
   };
 
   useEffect(() => {
-    if (location) setSnap(snapPoints[1]);
-  }, [location]);
+    if (location) {
+      setSnap(snapPoints[1]);
+      return;
+    }
+
+    if (q) {
+      setSnap(snapPoints[1]);
+      return;
+    }
+  }, [q, location]);
 
   return (
     <Drawer.Root open={true} modal={false} snapPoints={snapPoints} activeSnapPoint={snap} setActiveSnapPoint={setSnap}>
       <Drawer.Portal>
-        <Drawer.Content className="z-[101] sm:hiddena fixed bg-background rounded-t-xl border bottom-0 left-0 right-0 h-full max-h-[calc(100%-60px)]">
+        <Drawer.Content className="z-[101] sm:hidden fixed bg-background rounded-t-xl border bottom-0 left-0 right-0 h-full max-h-[calc(100%-60px)]">
           <button onClick={toggle} className="block py-2 pb-4 w-full">
             <Drawer.Handle className="mx-auto" />
           </button>
