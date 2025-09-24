@@ -1,8 +1,7 @@
 import { NaverMap } from "@/components/map/naver-map";
-import { LeftNav } from "@/components/nav/left-nav";
-import { MainLeftSection } from "@/components/section/main-left-section";
 import { TopnavMobile } from "@/components/nav/top-nav-mobile";
-import { BottomNavMobile } from "@/components/nav/bottom-nav-mobile";
+import { LocationLeftnav } from "@/components/nav/location-left-nav";
+import { LocationBottomnav } from "@/components/nav/location-bottom-nav";
 import { getFilteredLocations2 } from "@/lib/utils";
 
 interface Props {
@@ -17,13 +16,12 @@ export default async function Home({ searchParams }: Props) {
 
   return (
     <>
-      <LeftNav />
       <TopnavMobile baseUrl="/" />
-      <MainLeftSection q={q} location={location} locations={locations} />
-      <BottomNavMobile q={q} location={location} locations={locations} />
+      <LocationLeftnav q={q} location={location} locations={locations} />
       <main className="sm:pl-20 h-full">
-        <NaverMap location={location} locations={locations} />
+        <NaverMap q={q} location={location} locations={locations} />
       </main>
+      <LocationBottomnav q={q} location={location} locations={locations} />
     </>
   );
 }

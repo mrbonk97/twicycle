@@ -3,7 +3,7 @@ import { HomeIcon, MapPinIcon, VenetianMaskIcon } from "lucide-react";
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip";
 import { ThemeToggle } from "./theme-toggle";
 
-export function LeftNav() {
+export function Leftnav() {
   return (
     <nav className="z-[101] fixed hidden sm:block top-0 bottom-0 left-0 px-2 py-4 w-20 bg-secondary border-r">
       <ul className="space-y-2 text-blue-400">

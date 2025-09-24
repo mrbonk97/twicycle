@@ -37,3 +37,5 @@ export function getFilteredLocations2(q?: string, region?: string) {
 
   return locations;
 }
+
+export type LocationType = (typeof RENTAL_LOCATION)[0];

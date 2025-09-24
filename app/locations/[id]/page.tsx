@@ -43,19 +43,15 @@ async function LocationsIdPage({ params }: Props) {
           </section>
           <section className="mt-8">
             <h4 className="text-lg font-bold opacity-70 tracking-tight">가격</h4>
-            <div className="mt-2 font-semibold opacity-80 whitespace-pre-line">
-              {location.price}
-            </div>
+            <div className="mt-2 font-semibold opacity-80 whitespace-pre-line">{location.price}</div>
           </section>
           <section className="mt-8">
             <h4 className="text-lg font-bold opacity-70 tracking-tight">연락처</h4>
-            <div className="mt-2 font-semibold opacity-80 whitespace-pre-line">
-              {location.contact}
-            </div>
+            <div className="mt-2 font-semibold opacity-80 whitespace-pre-line">{location.contact}</div>
           </section>
           <section className="mt-8">
             <h4 className="text-lg font-bold opacity-70 tracking-tight">지도</h4>
-            <NaverMap className="mt-2 h-96 rounded-lg" location={location} locations={[location]} />
+            <NaverMap className="mt-2 h-96 rounded-lg" q={undefined} location={location} locations={[location]} />
             <Link
               scroll={false}
               href={`/?id=${location.id}`}

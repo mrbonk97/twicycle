@@ -1,18 +1,18 @@
 "use client";
 
-import { RENTAL_LOCATION } from "@/asset/rental-location";
-import { cn } from "@/lib/utils";
+import { cn, LocationType } from "@/lib/utils";
 import { useRouter } from "next/navigation";
 import Script from "next/script";
 import { useEffect, useRef } from "react";
 
 interface Props {
+  q: string | undefined;
+  location: LocationType | null | undefined;
+  locations: LocationType[];
   className?: string;
-  location: (typeof RENTAL_LOCATION)[0] | null | undefined;
-  locations: typeof RENTAL_LOCATION;
 }
 
-export function NaverMap({ className, location, locations }: Props) {
+export function NaverMap({ q, location, locations, className }: Props) {
   const markerRef = useRef<naver.maps.Marker[]>([]);
   const mapRef = useRef<naver.maps.Map | null>(null);
   const router = useRouter();
@@ -48,7 +48,10 @@ export function NaverMap({ className, location, locations }: Props) {
       });
 
       marker.addListener("click", () => {
-        router.push(`/?id=${loc.id}`);
+        const url = new URL("/", window.location.origin);
+        if (loc) url.searchParams.set("id", loc.id);
+        if (q) url.searchParams.set("q", q);
+        router.push(url.toString());
       });
 
       markerRef.current.push(marker);
@@ -59,7 +62,7 @@ export function NaverMap({ className, location, locations }: Props) {
       const pos = new naver.maps.LatLng(location.lat, location.lng);
       mapRef.current.panTo(pos);
     }
-  }, [locations, location, router]);
+  }, [q, locations, location, router]);
 
   return (
     <>
