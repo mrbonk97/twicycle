@@ -23,7 +23,7 @@ export function SearchButton({ baseUrl, className }: Props) {
         <Search />
         <span className="sr-only">검색</span>
       </DrawerTrigger>
-      <DrawerContent className="z-[105]">
+      <DrawerContent className="z-[102]">
         <DrawerHeader>
           <DrawerTitle className="text-left">검색</DrawerTitle>
           <DrawerDescription className="sr-only">대여소를 검색합니다.</DrawerDescription>

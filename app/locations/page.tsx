@@ -29,9 +29,7 @@ async function LocationsPage({ searchParams }: Props) {
           {locations.length == 0 && (
             <li className="col-span-2 mt-8 sm:mt-0 p-4 w-full">
               <Bird className="mx-auto text-blue-400" size={72} />
-              <p className="mt-2 text-center text-blue-400 font-semibold">
-                등록된 장소가 없습니다.
-              </p>
+              <p className="mt-2 text-center text-blue-400 font-semibold">등록된 장소가 없습니다.</p>
             </li>
           )}
           {locations.map((l) => (
@@ -59,13 +57,11 @@ const Card = ({ location }: { location: (typeof RENTAL_LOCATION)[0] }) => (
         height={512}
         width={512}
         alt={location.title}
-        src={location.image ?? "/location-placeholder.jpg"}
+        src={location.image ?? "/images/location-placeholder.jpg"}
         className="mt-2 h-40 sm:h-52 w-full aspect-square object-cover rounded sm:rounded-lg"
       />
       <p className="sm:hidden text-sm font-medium">{location.title}</p>
-      <p className="sm:mt-4 sm:text-center text-xs sm:text-sm font-medium opacity-70">
-        {location.address}
-      </p>
+      <p className="sm:mt-4 sm:text-center text-xs sm:text-sm font-medium opacity-70">{location.address}</p>
     </Link>
   </li>
 );

@@ -2,7 +2,6 @@ import "./globals.css";
 import type { Metadata } from "next";
 import { Noto_Sans_KR } from "next/font/google";
 import { ThemeProvider } from "@/components/theme-provider";
-import { Leftnav } from "@/components/nav/left-nav";
 
 const notoSans = Noto_Sans_KR({
   subsets: ["latin"],
@@ -22,7 +21,6 @@ export default function RootLayout({ children }: Props) {
     <html lang="ko" suppressHydrationWarning>
       <body className={`${notoSans.className} antialiased`}>
         <ThemeProvider attribute="class" defaultTheme="light" enableSystem disableTransitionOnChange>
-          <Leftnav />
           {children}
         </ThemeProvider>
       </body>

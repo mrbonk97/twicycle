@@ -33,7 +33,7 @@ export function LocationList({ q, locations }: Props) {
               height={320}
               width={320}
               alt={item.title}
-              src={item.image ?? "/location-placeholder.jpg"}
+              src={item.image ?? "/images/location-placeholder.jpg"}
               className="shrink-0 h-20 w-20 rounded-lg object-cover"
             />
           </Link>

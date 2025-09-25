@@ -1,3 +1,4 @@
+import { Leftnav } from "@/components/nav/left-nav";
 import { TopnavMobile } from "@/components/nav/top-nav-mobile";
 
 interface Props {
@@ -7,6 +8,7 @@ interface Props {
 async function LocationLayout({ children }: Props) {
   return (
     <>
+      <Leftnav />
       <TopnavMobile baseUrl="/locations" />
       {children}
     </>

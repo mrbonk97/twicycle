@@ -28,7 +28,7 @@ async function LocationsIdPage({ params }: Props) {
             height={1080}
             width={1080}
             alt={location.title}
-            src={location.image ?? "/location-placeholder.jpg"}
+            src={location.image ?? "/images/location-placeholder.jpg"}
             className="mt-4 h-60 sm:h-96 w-full aspect-square object-cover rounded-lg"
           />
           <section className="mt-4 pt-2 border-t">

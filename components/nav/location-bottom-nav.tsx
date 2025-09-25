@@ -37,7 +37,7 @@ export function LocationBottomnav({ q, location, locations }: Props) {
     <Drawer.Root open={true} modal={false} snapPoints={snapPoints} activeSnapPoint={snap} setActiveSnapPoint={setSnap}>
       <Drawer.Portal>
         <Drawer.Content className="z-[101] sm:hidden fixed bg-background rounded-t-xl border bottom-0 left-0 right-0 h-full max-h-[calc(100%-60px)]">
-          <button onClick={toggle} className="block py-2 pb-4 w-full">
+          <button onClick={toggle} className="block pt-2 pb-6 w-full">
             <Drawer.Handle className="mx-auto" />
           </button>
           <Drawer.Title className="sr-only">대여소 목록</Drawer.Title>

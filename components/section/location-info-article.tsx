@@ -21,7 +21,7 @@ export function LocationInfoArticle({ q, location }: Props) {
         height={320}
         width={320}
         alt={location?.title ?? "placeholder"}
-        src={location?.image ?? "/location-placeholder.jpg"}
+        src={location?.image ?? "/images/location-placeholder.jpg"}
         className="mt-2 h-40 w-full object-cover rounded-lg"
       />
       <hgroup className="mt-2">

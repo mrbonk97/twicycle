@@ -3,6 +3,7 @@ import { TopnavMobile } from "@/components/nav/top-nav-mobile";
 import { LocationLeftnav } from "@/components/nav/location-left-nav";
 import { LocationBottomnav } from "@/components/nav/location-bottom-nav";
 import { getFilteredLocations2 } from "@/lib/utils";
+import { Leftnav } from "@/components/nav/left-nav";
 
 interface Props {
   searchParams: Promise<{ id: string; q: string }>;
@@ -16,6 +17,7 @@ export default async function Home({ searchParams }: Props) {
 
   return (
     <>
+      <Leftnav />
       <TopnavMobile baseUrl="/" />
       <LocationLeftnav q={q} location={location} locations={locations} />
       <main className="sm:pl-20 h-full">
